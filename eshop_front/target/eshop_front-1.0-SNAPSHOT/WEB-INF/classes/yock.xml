@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<mvc-config>
+
+	<!-- 配置你的控制器类有哪些 -->
+	<controller-class>
+		<controller name="goodsController" className="com.wangshidai.eshop_front.controller.GoodsController" />
+	</controller-class>
+	
+	
+	<!-- 你每一个控制器中有哪些路径 -->
+	<controller-mappings>
+		<action name="goodsController" path="/product/type.action" />
+	</controller-mappings>
+		
+		
+</mvc-config>
