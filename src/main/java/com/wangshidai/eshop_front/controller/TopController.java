@@ -39,7 +39,6 @@ public class TopController extends HttpServlet {
         List<TypeInfo> rootType = topService.findAll(parent_id1);
         request.setAttribute("rootType",rootType);
         request.setAttribute("type_id",type_id1);
-        System.out.println("你好");
         //请求包含
         request.getRequestDispatcher("WEB-INF/views/top.jsp").include(request,response);
     }
