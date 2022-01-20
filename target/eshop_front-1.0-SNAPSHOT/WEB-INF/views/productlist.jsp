@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -7,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,58 +35,33 @@
                 </dt>
             </dl>
             <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
-
-                <dd class="on">
-                    <a href="product_list.html">
-                        <span>计算机馆</span>
-                    </a>
-                </dd>
-
-
+                <c:forEach items="${rootType}" var="type">
+                    <dd class="${type.type_id == type_id ? 'on' : ''}">
+                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}">
+                            <span>${type.type_name}</span>
+                        </a>
+                    </dd>
+                </c:forEach>
             </dl>
         </div>
 
         <div class="tg_classify_wrap clearfix">
             <dl class="tg_classify_all tg_classify_flat dl_left">
                 <dt class="">
-                    <i class="icon_order"></i> 计算机馆
+                    <i class="icon_order"></i> ${rootLevelGood}
                 </dt>
             </dl>
             <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
                 <dd class="on">
                     <a href="product_list.html"><span>不限</span></a>
                 </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>编程语言</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>办公软件</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>数据库</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>操作系统</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>人工智能</span>
-                    </a>
-                </dd>
-
+                <c:forEach items="${oneLevelGoods}" var="oneLevelGood">
+                    <dd class="">
+                        <a href="product_list.html">
+                            <span>${oneLevelGood.type_name}</span>
+                        </a>
+                    </dd>
+                </c:forEach>
             </dl>
         </div>
     </div>

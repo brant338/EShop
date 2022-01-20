@@ -26,9 +26,10 @@ public class GoodsController {
         }else{
             type_id1 = 0;
         }
-        List<TypeInfo> oneLevelGoodTypes = goodsService.findGoodType(type_id1);
+        //查询一级分类商品列表
+        List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id1);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("oneLevelGoodType",oneLevelGoodTypes);
+        modelAndView.addObject("oneLevelGoods",oneLevelGoods);
         return modelAndView;
     }
 }
