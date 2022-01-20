@@ -36,71 +36,13 @@
             </dl>
             <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
 
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>文学馆</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>生活馆</span>
-                    </a>
-                </dd>
-
                 <dd class="on">
                     <a href="product_list.html">
                         <span>计算机馆</span>
                     </a>
                 </dd>
 
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>童书馆</span>
-                    </a>
-                </dd>
 
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>金融馆</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>励志馆</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>艺术馆</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>科技馆</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>历史</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>心理学</span>
-                    </a>
-                </dd>
-
-                <dd class="">
-                    <a href="product_list.html">
-                        <span>军事</span>
-                    </a>
-                </dd>
             </dl>
         </div>
 

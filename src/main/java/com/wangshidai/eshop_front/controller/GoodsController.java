@@ -19,24 +19,16 @@ public class GoodsController {
     @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/productlist.jsp")
     public ModelAndView find(HttpServletRequest request,
                              HttpServletResponse response,
-                             @YockMvcAnnotation.RequestParam(name = "parentId") String parentId,
                              @YockMvcAnnotation.RequestParam(name="type_id") String type_id){
-        int parent_id1;
         int type_id1;
-        if(parentId != null){
-            parent_id1 = Integer.parseInt(parentId);
-        }else{
-            parent_id1=0;
-        }
         if(type_id != null){
             type_id1 = Integer.parseInt(type_id);
         }else{
             type_id1 = 0;
         }
+        List<TypeInfo> oneLevelGoodTypes = goodsService.findGoodType(type_id1);
         ModelAndView modelAndView = new ModelAndView();
-        List<TypeInfo> typeList = goodsService.findGoodType(parent_id1);
-        modelAndView.addObject("goodTypes",typeList);
-        modelAndView.addObject("type_id",type_id1);
+        modelAndView.addObject("oneLevelGoodType",oneLevelGoodTypes);
         return modelAndView;
     }
 }

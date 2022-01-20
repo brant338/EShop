@@ -3,7 +3,6 @@ package com.wangshidai.eshop_front.controller;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.service.TopService;
 import com.wangshidai.eshop_front.service.impl.TopServiceImpl;
-import org.lanqiao.mvc.entity.YockMvcAnnotation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

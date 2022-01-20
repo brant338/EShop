@@ -87,7 +87,7 @@
     <div class='nav_main clearfix' id="topMenu">
         <a href="${pageContext.request.contextPath}/" class="menu ${type_id == 0 ? 'current' : ''}">首 页</a>
         <c:forEach items="${rootType}" var="types" >
-        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${types.type_id}&parentId=0"
+        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${types.type_id}"
            class="menu ${type_id == types.type_id ? 'current' : ''} "> ${types.type_name}
         </a>
         </c:forEach>

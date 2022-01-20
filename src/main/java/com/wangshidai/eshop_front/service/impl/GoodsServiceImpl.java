@@ -12,7 +12,7 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDao goodsDao = new GoodsDaoImpl();
 
     @Override
-    public List<TypeInfo> findGoodType(Integer parent_id) {
-        return goodsDao.findGoodType(parent_id);
+    public List<TypeInfo> findGoodType(Integer oneLevelGoodParentId) {
+        return goodsDao.findGoodType(oneLevelGoodParentId);
     }
 }

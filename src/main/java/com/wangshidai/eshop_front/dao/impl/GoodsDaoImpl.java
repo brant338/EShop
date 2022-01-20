@@ -8,9 +8,9 @@ import java.util.List;
 
 public class GoodsDaoImpl implements GoodsDao {
     @Override
-    public List<TypeInfo> findGoodType(Integer parent_id) {
+    public List<TypeInfo> findGoodType(Integer oneLevelGoodParentId) {
         return MyJdbcUtilsV5.acquareFileldToBean(TypeInfo.class,
                 "select * from tb_type where parent_id = ?",
-                parent_id);
+                oneLevelGoodParentId);
     }
 }
