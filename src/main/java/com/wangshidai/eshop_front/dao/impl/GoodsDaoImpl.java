@@ -5,6 +5,7 @@ import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.utils.MyJdbcUtilsV5;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsDaoImpl implements GoodsDao {
@@ -16,10 +17,18 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public List<GoodsInfo> findGood(int goodId) {
+    public List<GoodsInfo> findGood(int type_id1, int child_type_id) {
+        String sql = "SELECT * FROM `tb_book` where type_id = ?";
+        ArrayList<Object> paramList = new ArrayList<>();
+        if(child_type_id != 0){
+            paramList.add(child_type_id);
+        }else{
+            sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
+            paramList.add(type_id1);
+            paramList.add(type_id1);
+        }
         return MyJdbcUtilsV5.acquareFileldToBean(GoodsInfo.class,
-                "SELECT * FROM `tb_book` where type_id = 1 \n" +
-                "or type_id in (select type_id from tb_type where parent_id = ?)",
-                goodId);
+                sql,
+                paramList.toArray());
     }
 }

@@ -57,7 +57,7 @@
                 </dd>
                 <c:forEach items="${oneLevelGoods}" var="oneLevelGood">
                     <dd class="">
-                        <a href="product_list.html">
+                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
                             <span>${oneLevelGood.type_name}</span>
                         </a>
                     </dd>
@@ -133,7 +133,6 @@
         </div>
 
     </div>
-
     <div class="list">
         <div class="list_main clearfix">
             <c:forEach items="${goods}" var="goodInfo" varStatus="i">
@@ -158,7 +157,6 @@
                     </div>
                 </div>
             </c:forEach>
-
         </div>
     </div>
 

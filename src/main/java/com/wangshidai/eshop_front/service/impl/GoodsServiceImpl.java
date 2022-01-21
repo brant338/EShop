@@ -18,7 +18,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<GoodsInfo> findGood(int goodId) {
-        return goodsDao.findGood(goodId);
+    public List<GoodsInfo> findGood(int type_id1, int child_type_id) {
+        return goodsDao.findGood(type_id1, child_type_id);
     }
 }

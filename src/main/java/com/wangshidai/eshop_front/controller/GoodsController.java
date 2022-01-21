@@ -20,16 +20,25 @@ public class GoodsController {
     @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/productlist.jsp")
     public ModelAndView find(HttpServletRequest request,
                              HttpServletResponse response,
-                             @YockMvcAnnotation.RequestParam(name="type_id") String type_id){
+                             @YockMvcAnnotation.RequestParam(name="type_id") String type_id,
+                             @YockMvcAnnotation.RequestParam(name="child_type_id") String child_type_id){
         int type_id1;
+        int child_type_id1;
         if(type_id != null){
             type_id1 = Integer.parseInt(type_id);
         }else{
             type_id1 = 0;
         }
-        //查询一级分类商品列表
+        if(child_type_id != null){
+            child_type_id1 = Integer.parseInt(child_type_id);
+        }else{
+            child_type_id1 = 0;
+        }
+        //查询一级分类商品类型列表
         List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id1);
-        List<GoodsInfo> goodList = goodsService.findGood(type_id1);
+
+        //查询商品
+        List<GoodsInfo> goodList = goodsService.findGood(type_id1,child_type_id1);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("oneLevelGoods",oneLevelGoods);
         modelAndView.addObject("goods",goodList);
