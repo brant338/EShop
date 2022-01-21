@@ -114,6 +114,10 @@
             </dl>
         </div>
 
+        <c:set var="pageUrl">
+            ${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}&keyword=${keyword}
+        </c:set>
+
         <div id="order-page" class="order-page">
 
 
@@ -122,12 +126,27 @@
 					商品
 				</span>
             <span class="page-small">
-						<a class="prev-btn page-btn" href="#">
-							<span class="arrow-left arrow arrow-left-none"></span>
+						<a class="prev-btn page-btn" <c:if test="${goodPage.currentPage <= 1}">href="javascript:;"</c:if>
+                           <c:if test="${goodPage.currentPage > 1}">href="${pageUrl}&currentPage=${goodPage.currentPage-1}"</c:if>>
+							<span class="arrow-left arrow arrow-left-none" <c:if test="${goodPage.currentPage <= 1}">style="border-right: 5px solid #ccc;" </c:if>
+                                  <c:if test="${goodPage.currentPage > 1}">style="border-right: 5px solid #2A2C2E;"</c:if>></span>
 						</a>
-						<span class="orange">1</span>/2
-						<a class="pnext-btn page-btn" href="productlist.action?typeId=3&amp;childTypeId=&amp;typeName=计算机馆&amp;currentpage=2">
-							<span class="arrow-right arrow"></span>
+                <!-- 显示页码 -->
+        <c:if test="${goodPage.totalPage <= 1}">
+                <span class="orange">${goodPage.currentPage}</span>
+        </c:if>
+        <c:if test="${goodPage.totalPage > 1}">
+            <c:if test="${goodPage.currentPage >1 && (goodPage.totalPage-goodPage.currentPage) < 1 }">
+                ${goodPage.currentPage-1}/<span class="orange">${goodPage.currentPage}</span>
+            </c:if>
+            <c:if test="${goodPage.totalPage > 1 && (goodPage.totalPage-goodPage.currentPage) >= 1}">
+                <span class="orange">${goodPage.currentPage}</span>/${goodPage.currentPage+1}
+            </c:if>
+        </c:if>
+						<a class="pnext-btn page-btn" <c:if test="${goodPage.currentPage >= goodPage.totalPage}">href="javascript:;"</c:if>
+                           <c:if test="${goodPage.currentPage < goodPage.totalPage}">href="${pageUrl}&currentPage=${goodPage.currentPage+1}"</c:if>>
+							<span class="arrow-right arrow" <c:if test="${goodPage.currentPage >= goodPage.totalPage}">style="border-left: 5px solid #ccc;"</c:if>
+                                  <c:if test="${goodPage.currentPage < goodPage.totalPage}">style="border-left: 5px solid #2A2C2E;"</c:if>></span>
 						</a>
 				</span>
         </div>
@@ -163,9 +182,7 @@
 
     <div class="pager">
         共<span class="red"> ${goodPage.totalSize}</span>个商品
-        <c:set var="pageUrl">
-            ${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}&keyword=${keyword}
-        </c:set>
+
 
         <!-- 首页、上一页 -->
         <a class="prev" <c:if test="${goodPage.currentPage <= 1}">href="javascript:;"</c:if>
