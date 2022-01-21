@@ -60,14 +60,14 @@
         <div class="logo">
             <a class="logo-bd" href="index.html"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
         </div>
-        <form action="product_list.jsp" method="post" id="form_search" onsubmit="return searchSub()">
+        <form action="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}" method="post" id="form_search">
             <div id='search'>
                 <div class="search_area">
                     <input type='submit' value='搜 索' class='btn_search' />
                     <div class="search_select">
                         <span class="icon-search"></span>
                     </div>
-                    <input type='text' name="keyword" value='请输入搜索内容' class="search_input" autocomplete="off" id="search_input" data-default="请输入搜索内容"
+                    <input type='text' name="keyword" value='${keyword}' class="search_input" autocomplete="off" id="search_input" data-default="请输入搜索内容"
                            onblur="checkInputBlur($(this))" onfocus="checkInputFocus($(this))" />
                 </div>
                 <div class="search_box hide" id="search_box"></div>

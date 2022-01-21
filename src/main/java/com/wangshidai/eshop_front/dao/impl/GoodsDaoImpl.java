@@ -31,4 +31,33 @@ public class GoodsDaoImpl implements GoodsDao {
                 sql,
                 paramList.toArray());
     }
+
+    @Override
+    public List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword) {
+        String sql = "  ";
+        ArrayList<Object> goodsInfos = new ArrayList<>();
+        if(keyword == null || keyword.isEmpty()){
+            sql = "SELECT * FROM `tb_book` where type_id = ?";
+            if(child_type_id1 != 0){
+                goodsInfos.add(child_type_id1);
+            }else{
+                sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
+                goodsInfos.add(type_id1);
+                goodsInfos.add(type_id1);
+            }
+        }else{
+            sql = " select * from tb_book \n" +
+                    "where (type_id = ? or type_id in (select type_id from tb_type where parent_id = ?)) \n" +
+                    "and (book_name like ? or book_author like ? or book_press like ?)\n" +
+                    "order by book_id";
+            goodsInfos.add(type_id1);
+            goodsInfos.add(type_id1);
+            goodsInfos.add("%"+keyword+"%");
+            goodsInfos.add("%"+keyword+"%");
+            goodsInfos.add("%"+keyword+"%");
+        }
+        return MyJdbcUtilsV5.acquareFileldToBean(GoodsInfo.class,
+                sql,
+                goodsInfos.toArray());
+    }
 }

@@ -9,4 +9,6 @@ public interface GoodsService {
     List<TypeInfo> findGoodType(Integer oneLevelGoodParentId);
 
     List<GoodsInfo> findGood(int type_id1, int child_type_id);
+
+    List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword);
 }
