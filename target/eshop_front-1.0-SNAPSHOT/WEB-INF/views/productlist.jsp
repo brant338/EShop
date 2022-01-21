@@ -136,92 +136,28 @@
 
     <div class="list">
         <div class="list_main clearfix">
-
-
-
-            <div class="per">
-                <a target="_blank" href="product_info.html" class="img_link">
-                    <img src="${pageContext.request.contextPath}/upload/150902505493857c3d0e2N8d0102bc.jpg" original="#" alt="#" class="lazy">
-                </a>
-                <div class="foot">
-                    <p class="title">
-                        <a target="_blank" href="product_info.html">
-                            协和专家+协和妈妈圈干货分享（分娩）
-                        </a>
-                    </p>
-                    <div class="statics">
-                        <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>25.3¥</em></a>
+            <c:forEach items="${goods}" var="goodInfo" varStatus="i">
+                <c:set var="isRight">
+                    <c:if test="${(i.index+1)%4 == 0}">
+                        style="margin-right: 0"
+                    </c:if>
+                </c:set>
+                <div class="per" ${isRight}>
+                    <a target="_blank" href="product_info.html" class="img_link">
+                        <img src="${pageContext.request.contextPath}/upload/${goodInfo.book_logo_small}" original="#" alt="#" class="lazy">
+                    </a>
+                    <div class="foot">
+                        <p class="title">
+                            <a target="_blank" href="product_info.html">
+                                ${goodInfo.book_name}
+                            </a>
+                        </p>
+                        <div class="statics">
+                            <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>36.1¥</em></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <div class="per">
-                <a target="_blank" href="product_info.html" class="img_link">
-                    <img src="${pageContext.request.contextPath}/upload/150950900808803-1.jpg" original="#" alt="#" class="lazy">
-                </a>
-                <div class="foot">
-                    <p class="title">
-                        <a target="_blank" href="product_info.html">
-                            好孩子不是管出来的2：自由的孩子更自觉
-                        </a>
-                    </p>
-                    <div class="statics">
-                        <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>16.8¥</em></a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="per">
-                <a target="_blank" href="product_info.html" class="img_link">
-                    <img src="${pageContext.request.contextPath}/upload/150950913184604-1.jpg" original="#" alt="#" class="lazy">
-                </a>
-                <div class="foot">
-                    <p class="title">
-                        <a target="_blank" href="product_info.html">
-                            正面管教
-                        </a>
-                    </p>
-                    <div class="statics">
-                        <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>36.1¥</em></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="per" style="margin-right: 0">
-                <a target="_blank" href="product_info.html" class="img_link">
-                    <img src="${pageContext.request.contextPath}/upload/150950913184604-1.jpg" original="#" alt="#" class="lazy">
-                </a>
-                <div class="foot">
-                    <p class="title">
-                        <a target="_blank" href="product_info.html">
-                            正面管教
-                        </a>
-                    </p>
-                    <div class="statics">
-                        <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>36.1¥</em></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="per">
-                <a target="_blank" href="product_info.html" class="img_link">
-                    <img src="${pageContext.request.contextPath}/upload/150950913184604-1.jpg" original="#" alt="#" class="lazy">
-                </a>
-                <div class="foot">
-                    <p class="title">
-                        <a target="_blank" href="product_info.html">
-                            正面管教
-                        </a>
-                    </p>
-                    <div class="statics">
-                        <a class="download citecommon">浏览 <em>3次</em></a> <a class="comment citecommon">评论 <em>4条</em></a> <a class="scores citecommon">售价：<em>36.1¥</em></a>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
 
         </div>
     </div>

@@ -2,6 +2,7 @@ package com.wangshidai.eshop_front.service.impl;
 
 import com.wangshidai.eshop_front.dao.GoodsDao;
 import com.wangshidai.eshop_front.dao.impl.GoodsDaoImpl;
+import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.service.GoodsService;
 
@@ -14,5 +15,10 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<TypeInfo> findGoodType(Integer oneLevelGoodParentId) {
         return goodsDao.findGoodType(oneLevelGoodParentId);
+    }
+
+    @Override
+    public List<GoodsInfo> findGood(int goodId) {
+        return goodsDao.findGood(goodId);
     }
 }

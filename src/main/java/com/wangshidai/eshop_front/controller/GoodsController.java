@@ -1,5 +1,6 @@
 package com.wangshidai.eshop_front.controller;
 
+import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.service.GoodsService;
 import com.wangshidai.eshop_front.service.impl.GoodsServiceImpl;
@@ -28,8 +29,10 @@ public class GoodsController {
         }
         //查询一级分类商品列表
         List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id1);
+        List<GoodsInfo> goodList = goodsService.findGood(type_id1);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("oneLevelGoods",oneLevelGoods);
+        modelAndView.addObject("goods",goodList);
         return modelAndView;
     }
 }
