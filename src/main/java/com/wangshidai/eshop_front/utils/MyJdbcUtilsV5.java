@@ -323,14 +323,10 @@ public class MyJdbcUtilsV5 {
 			if(resultSet.next()){
 			  val1 = resultSet.getObject(1);
 			}
-			
-			
 		} catch (SQLException e) {
 			logger.error("-1",e);
 		}
     	return val1;
-    	
-    	
     }
 
     /**

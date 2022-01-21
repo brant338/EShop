@@ -118,7 +118,7 @@
 
 
 				<span class="find_results_num">
-					共<span class="red"> 11</span>
+					共<span class="red"> ${goodCount}</span>
 					商品
 				</span>
             <span class="page-small">
@@ -162,7 +162,7 @@
 
 
     <div class="pager">
-        共<span class="red"> 25 </span>个商品
+        共<span class="red"> ${goodCount}</span>个商品
 
         <!-- 首页、上一页 -->
         <a class="prev">首页</a>

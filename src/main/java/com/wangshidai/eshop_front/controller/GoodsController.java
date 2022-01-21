@@ -1,6 +1,7 @@
 package com.wangshidai.eshop_front.controller;
 
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
+import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.service.GoodsService;
 import com.wangshidai.eshop_front.service.impl.GoodsServiceImpl;
@@ -22,9 +23,11 @@ public class GoodsController {
                              HttpServletResponse response,
                              @YockMvcAnnotation.RequestParam(name="type_id") String type_id,
                              @YockMvcAnnotation.RequestParam(name="child_type_id") String child_type_id,
-                             @YockMvcAnnotation.RequestParam(name="keyword") String keyword){
+                             @YockMvcAnnotation.RequestParam(name="keyword") String keyword,
+                             @YockMvcAnnotation.RequestParam(name = "currentPage") String currentPage){
         int type_id1;
         int child_type_id1;
+        PageInfo<GoodsInfo> pageInfo = new PageInfo();
         if(type_id != null){
             type_id1 = Integer.parseInt(type_id);
         }else{
@@ -35,14 +38,23 @@ public class GoodsController {
         }else{
             child_type_id1 = 0;
         }
+        if(currentPage != null){
+            pageInfo.setCurrentPage(Integer.parseInt(currentPage));
+        }else{
+            pageInfo.setCurrentPage(1);
+        }
         //查询一级分类商品类型列表
         List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id1);
 
         //搜索
-        List<GoodsInfo> goodList = goodsService.findGood(type_id1,child_type_id1,keyword);
+        List<GoodsInfo> goodList = goodsService.findGood(type_id1,child_type_id1,keyword,pageInfo);
+        int goodCount = goodsService.findGoodCount(type_id1,child_type_id1,keyword);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("oneLevelGoods",oneLevelGoods);
         modelAndView.addObject("goods",goodList);
+        //查询搜索数据总条数
+        modelAndView.addObject("goodCount",goodCount);
         //回显搜索数据
         modelAndView.addObject("keyword",keyword);
         return modelAndView;

@@ -3,6 +3,7 @@ package com.wangshidai.eshop_front.service.impl;
 import com.wangshidai.eshop_front.dao.GoodsDao;
 import com.wangshidai.eshop_front.dao.impl.GoodsDaoImpl;
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
+import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
 import com.wangshidai.eshop_front.service.GoodsService;
 
@@ -23,7 +24,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword) {
-        return goodsDao.findGood(type_id1,child_type_id1,keyword);
+    public List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword, PageInfo<GoodsInfo> pageInfo) {
+        return goodsDao.findGood(type_id1,child_type_id1,keyword,pageInfo);
     }
+
+    @Override
+    public int findGoodCount(int type_id1, int child_type_id1, String keyword) {
+        return goodsDao.findGoodCount(type_id1,child_type_id1,keyword);
+    }
+
+
 }
