@@ -28,6 +28,7 @@ public class GoodsController {
         int type_id1;
         int child_type_id1;
         PageInfo<GoodsInfo> pageInfo = new PageInfo();
+        pageInfo.setPageSize(4);
         if(type_id != null){
             type_id1 = Integer.parseInt(type_id);
         }else{
@@ -50,13 +51,25 @@ public class GoodsController {
         List<GoodsInfo> goodList = goodsService.findGood(type_id1,child_type_id1,keyword,pageInfo);
         int goodCount = goodsService.findGoodCount(type_id1,child_type_id1,keyword);
 
+        //封装分页有关参数
+        int totalPage =
+                goodCount % pageInfo.getPageSize() ==0 ? goodCount/pageInfo.getPageSize() : goodCount/pageInfo.getPageSize()+1 ;
+        pageInfo.setTotalPage(totalPage);
+        pageInfo.setCurrentPageData(goodList);
+        pageInfo.setTotalSize(goodCount);
+        System.out.println("pageInfo +"+pageInfo);
+
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("oneLevelGoods",oneLevelGoods);
         modelAndView.addObject("goods",goodList);
         //查询搜索数据总条数
-        modelAndView.addObject("goodCount",goodCount);
+        modelAndView.addObject("goodPage",pageInfo);
         //回显搜索数据
         modelAndView.addObject("keyword",keyword);
+
+        modelAndView.addObject("child_type_id",child_type_id1);
+
         return modelAndView;
     }
 }

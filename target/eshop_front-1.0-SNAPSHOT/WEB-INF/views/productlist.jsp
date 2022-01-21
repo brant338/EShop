@@ -118,7 +118,7 @@
 
 
 				<span class="find_results_num">
-					共<span class="red"> ${goodCount}</span>
+					共<span class="red"> ${goodPage.totalSize}</span>
 					商品
 				</span>
             <span class="page-small">
@@ -162,36 +162,61 @@
 
 
     <div class="pager">
-        共<span class="red"> ${goodCount}</span>个商品
+        共<span class="red"> ${goodPage.totalSize}</span>个商品
+        <c:set var="pageUrl">
+            ${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}&keyword=${keyword}
+        </c:set>
 
         <!-- 首页、上一页 -->
-        <a class="prev">首页</a>
-        <a class="prev">上一页</a>
+        <a class="prev" <c:if test="${goodPage.currentPage <= 1}">href="javascript:;"</c:if>
+           <c:if test="${goodPage.currentPage > 1}">href="${pageUrl}&currentPage=1"</c:if>>首页</a>
+        <a class="prev" <c:if test="${goodPage.currentPage <= 1}">href="javascript:;"</c:if>
+           <c:if test="${goodPage.currentPage > 1}">href="${pageUrl}&currentPage=${goodPage.currentPage-1}"</c:if>>上一页</a>
 
 
         <!-- 显示页码 -->
-        <a class="current" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=1">
-            1
-        </a>
-        <a class="num" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=2">
-            2
-        </a>
-        <a class="num" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=3">
-            3
-        </a>
-        <a class="num" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=4">
-            4
-        </a>
+        <c:if test="${goodPage.totalPage <= 5}">
+            <c:forEach begin="1" end="${goodPage.totalPage}" var="i">
+                <a <c:if test="${goodPage.currentPage == i}">class="current"</c:if> href="${pageUrl}&currentPage=${i}">
+                    ${i}
+                </a>
+            </c:forEach>
+        </c:if>
+        <c:if test="${goodPage.totalPage > 5}">
+            <c:if test="${goodPage.currentPage <= 3}">
+                <c:forEach begin="0" end="4" step="1" var="i">
+                    <a <c:if test="${goodPage.currentPage == i+1}">class="current"</c:if> href="${pageUrl}&currentPage=${i+1}">
+                            ${i+1}
+                    </a>
+                </c:forEach>
+            </c:if>
+            <c:if test="${goodPage.currentPage >3 && (goodPage.totalPage-goodPage.currentPage) <= 2 }">
+                <c:forEach begin="${goodPage.totalPage-5}" end="${goodPage.totalPage-1}" var="i">
+                    <a <c:if test="${goodPage.currentPage == i+1}">class="current"</c:if> href="${pageUrl}&currentPage=${i+1}">
+                            ${i+1}
+                    </a>
+                </c:forEach>
+            </c:if>
+            <c:if test="${goodPage.currentPage > 3 && (goodPage.totalPage-goodPage.currentPage) > 2}">
+                <c:forEach begin="${goodPage.currentPage-3}" end="${goodPage.currentPage+1}" var="i">
+                    <a <c:if test="${goodPage.currentPage == i+1}">class="current"</c:if> href="${pageUrl}&currentPage=${i+1}">
+                            ${i+1}
+                    </a>
+                </c:forEach>
+            </c:if>
+        </c:if>
 
         <!-- ...33 -->
 
 
         <!-- 末页、下一页 -->
 
-        <a class="next" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=2">
+        <a class="next" <c:if test="${goodPage.currentPage >= goodPage.totalPage}">href="javascript:;"</c:if>
+           <c:if test="${goodPage.currentPage < goodPage.totalPage}">href="${pageUrl}&currentPage=${goodPage.currentPage+1}"</c:if>>
             下一页
         </a>
-        <a class="next" href="productlist.action?typeId=1&amp;childTypeId=&amp;typeName=文学馆&amp;currentpage=4">
+        <a class="next" <c:if test="${goodPage.currentPage >= goodPage.totalPage}">href="javascript:;"</c:if>
+           <c:if test="${goodPage.currentPage < goodPage.totalPage}">href="${pageUrl}&currentPage=${goodPage.totalPage}"</c:if>>
             末页
         </a>
     </div>
@@ -213,9 +238,9 @@
 </div>
 
 
-<script src="public/js/jquery.js" type="text/javascript"></script>
-<script src="public/js/common.js" type="text/javascript"></script>
-<script src="public/js/other/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/public/js/jquery.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/public/js/common.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/public/js/other/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
 
 </body>
 </html>

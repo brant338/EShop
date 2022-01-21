@@ -57,6 +57,10 @@ public class GoodsDaoImpl implements GoodsDao {
             goodsInfos.add("%"+keyword+"%");
             goodsInfos.add("%"+keyword+"%");
         }
+        sql += " limit ?,? ";
+        goodsInfos.add((pageInfo.getCurrentPage()-1)*pageInfo.getPageSize());
+        goodsInfos.add(pageInfo.getPageSize());
+
         return MyJdbcUtilsV5.acquareFileldToBean(GoodsInfo.class,
                 sql,
                 goodsInfos.toArray());
