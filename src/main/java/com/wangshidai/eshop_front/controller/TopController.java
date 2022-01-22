@@ -20,25 +20,10 @@ public class TopController extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         super.service(request, response);
-        String parentId = request.getParameter("parentId");
-        String type_id = request.getParameter("type_id");
         String goodDetailMenu = request.getParameter("goodDetailMenu");
-
-        int parent_id1;
-        int type_id1;
-        if(parentId != null){
-            parent_id1 = Integer.parseInt(parentId);
-        }else{
-            parent_id1=0;
-        }
-        if(type_id != null){
-            type_id1 = Integer.parseInt(type_id);
-        }else{
-            type_id1 = 0;
-        }
-        List<TypeInfo> rootType = topService.findAll(parent_id1);
+        int parentId = 0;
+        List<TypeInfo> rootType = topService.findAll(parentId);
         request.setAttribute("rootType",rootType);
-        request.setAttribute("type_id",type_id1);
         request.setAttribute("goodDetailMenu",goodDetailMenu);
         //请求包含
         request.getRequestDispatcher("WEB-INF/views/top.jsp").include(request,response);

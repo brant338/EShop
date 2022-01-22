@@ -26,31 +26,20 @@ public class GoodsController {
                              @YockMvcAnnotation.RequestParam(name="child_type_id") String child_type_id,
                              @YockMvcAnnotation.RequestParam(name="keyword") String keyword,
                              @YockMvcAnnotation.RequestParam(name = "currentPage") String currentPage){
-        int type_id1;
-        int child_type_id1;
         PageInfo<GoodsInfo> pageInfo = new PageInfo();
         pageInfo.setPageSize(4);
-        if(type_id != null){
-            type_id1 = Integer.parseInt(type_id);
-        }else{
-            type_id1 = 0;
-        }
-        if(child_type_id != null){
-            child_type_id1 = Integer.parseInt(child_type_id);
-        }else{
-            child_type_id1 = 0;
-        }
+
         if(currentPage != null){
             pageInfo.setCurrentPage(Integer.parseInt(currentPage));
         }else{
             pageInfo.setCurrentPage(1);
         }
         //查询一级分类商品类型列表
-        List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id1);
-
+        List<TypeInfo> oneLevelGoods = goodsService.findGoodType(type_id);
+        System.out.println(type_id);
         //搜索
-        List<GoodsInfo> goodList = goodsService.findGood(type_id1,child_type_id1,keyword,pageInfo);
-        int goodCount = goodsService.findGoodCount(type_id1,child_type_id1,keyword);
+        List<GoodsInfo> goodList = goodsService.findGood(type_id,child_type_id,keyword,pageInfo);
+        int goodCount = goodsService.findGoodCount(type_id,child_type_id,keyword);
 
         //封装分页有关参数
         int totalPage =
@@ -58,8 +47,6 @@ public class GoodsController {
         pageInfo.setTotalPage(totalPage);
         pageInfo.setCurrentPageData(goodList);
         pageInfo.setTotalSize(goodCount);
-        System.out.println("pageInfo +"+pageInfo);
-
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("oneLevelGoods",oneLevelGoods);
@@ -69,7 +56,10 @@ public class GoodsController {
         //回显搜索数据
         modelAndView.addObject("keyword",keyword);
 
-        modelAndView.addObject("child_type_id",child_type_id1);
+        modelAndView.addObject("type_id",type_id);
+
+        modelAndView.addObject("child_type_id",child_type_id);
+
 
         return modelAndView;
     }

@@ -12,22 +12,22 @@ import java.util.List;
 
 public class GoodsDaoImpl implements GoodsDao {
     @Override
-    public List<TypeInfo> findGoodType(Integer oneLevelGoodParentId) {
+    public List<TypeInfo> findGoodType(String rootTypeId) {
         return MyJdbcUtilsV5.acquareFileldToBean(TypeInfo.class,
                 "select * from tb_type where parent_id = ?",
-                oneLevelGoodParentId);
+                rootTypeId);
     }
 
     @Override
-    public List<GoodsInfo> findGood(int type_id1, int child_type_id) {
+    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId) {
         String sql = "SELECT * FROM `tb_book` where type_id = ?";
         ArrayList<Object> paramList = new ArrayList<>();
-        if(child_type_id != 0){
-            paramList.add(child_type_id);
+        if(oneLevelTypeId == null || !oneLevelTypeId.isEmpty()){
+            paramList.add(oneLevelTypeId);
         }else{
             sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
-            paramList.add(type_id1);
-            paramList.add(type_id1);
+            paramList.add(rootTypeId);
+            paramList.add(rootTypeId);
         }
         return MyJdbcUtilsV5.acquareFileldToBean(GoodsInfo.class,
                 sql,
@@ -35,25 +35,35 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword, PageInfo<GoodsInfo> pageInfo) {
+    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo) {
         String sql = "  ";
         ArrayList<Object> goodsInfos = new ArrayList<>();
-        if(keyword == null || keyword.isEmpty()){
-            sql = "SELECT * FROM `tb_book` where type_id = ?";
-            if(child_type_id1 != 0){
-                goodsInfos.add(child_type_id1);
+        //区分首页搜索,商品详情搜索还是非首页搜索
+        if(rootTypeId != null && !rootTypeId.isEmpty()){
+            if(keyword == null || keyword.isEmpty()){
+                sql = " SELECT * FROM `tb_book` where type_id = ?";
+                if(oneLevelTypeId != null && !oneLevelTypeId.isEmpty()){
+                    goodsInfos.add(oneLevelTypeId);
+                }else{
+                    sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
+                    goodsInfos.add(rootTypeId);
+                    goodsInfos.add(rootTypeId);
+                }
             }else{
-                sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
-                goodsInfos.add(type_id1);
-                goodsInfos.add(type_id1);
+                sql = " select * from tb_book \n" +
+                        " where (type_id = ? or type_id in (select type_id from tb_type where parent_id = ?)) \n" +
+                        " and (book_name like ? or book_author like ? or book_press like ?)\n" +
+                        " order by book_id";
+                goodsInfos.add(rootTypeId);
+                goodsInfos.add(rootTypeId);
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
             }
         }else{
             sql = " select * from tb_book \n" +
-                    "where (type_id = ? or type_id in (select type_id from tb_type where parent_id = ?)) \n" +
-                    "and (book_name like ? or book_author like ? or book_press like ?)\n" +
-                    "order by book_id";
-            goodsInfos.add(type_id1);
-            goodsInfos.add(type_id1);
+                    " where book_name like ? or book_author like ? or book_press like ? \n" +
+                    " order by book_id";
             goodsInfos.add("%"+keyword+"%");
             goodsInfos.add("%"+keyword+"%");
             goodsInfos.add("%"+keyword+"%");
@@ -68,28 +78,38 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public int findGoodCount(int type_id1, int child_type_id1, String keyword) {
+    public int findGoodCount(String rootTypeId, String oneLevelTypeId,  String keyword) {
         String sql = "  ";
         ArrayList<Object> goodsInfos = new ArrayList<>();
-        if(keyword == null || keyword.isEmpty()){
-            sql = "SELECT count(*) FROM `tb_book` where type_id = ?";
-            if(child_type_id1 != 0){
-                goodsInfos.add(child_type_id1);
+        //区分首页搜索,商品详情搜索还是非首页搜索
+        if(rootTypeId != null && !rootTypeId.isEmpty()){
+            if(keyword == null || keyword.isEmpty()){
+                sql = " SELECT count(*) FROM `tb_book` where type_id = ? ";
+                if(oneLevelTypeId != null && !oneLevelTypeId.isEmpty()){
+                    goodsInfos.add(oneLevelTypeId);
+                }else{
+                    sql += " or type_id in (select type_id from tb_type where parent_id = ?) ";
+                    goodsInfos.add(rootTypeId);
+                    goodsInfos.add(rootTypeId);
+                }
             }else{
-                sql += " or type_id in (select type_id from tb_type where parent_id = ?)";
-                goodsInfos.add(type_id1);
-                goodsInfos.add(type_id1);
+                sql = " select count(*) from tb_book \n" +
+                        " where (type_id = ? or type_id in (select type_id from tb_type where parent_id = ?)) \n" +
+                        " and (book_name like ? or book_author like ? or book_press like ?)\n" +
+                        " order by book_id";
+                goodsInfos.add(rootTypeId);
+                goodsInfos.add(rootTypeId);
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
             }
         }else{
-            sql = " select count(*) from tb_book \n" +
-                    "where (type_id = ? or type_id in (select type_id from tb_type where parent_id = ?)) \n" +
-                    "and (book_name like ? or book_author like ? or book_press like ?)\n" +
-                    "order by book_id";
-            goodsInfos.add(type_id1);
-            goodsInfos.add(type_id1);
-            goodsInfos.add("%"+keyword+"%");
-            goodsInfos.add("%"+keyword+"%");
-            goodsInfos.add("%"+keyword+"%");
+                sql = " select count(*) from tb_book \n" +
+                        " where book_name like ? or book_author like ? or book_press like ? \n" +
+                        " order by book_id";
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
+                goodsInfos.add("%"+keyword+"%");
         }
         return ((Long)MyJdbcUtilsV5.acquireSqlQuaryOne(sql,goodsInfos.toArray())).intValue();
     }
@@ -97,14 +117,14 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public GoodsInfo findGood(int book_id) {
         return MyJdbcUtilsV5.acquareFileldToBeanOneLine(GoodsInfo.class,
-                "select * from tb_book where book_id = ?",
+                " select * from tb_book where book_id = ? ",
                 book_id);
     }
 
     @Override
     public List<GoodPicInfo> findGoodPic(int book_id) {
         return MyJdbcUtilsV5.acquareFileldToBean(GoodPicInfo.class,
-                "select * from tb_book_pic where book_id = ?",
+                " select * from tb_book_pic where book_id = ? ",
                 book_id);
     }
 }

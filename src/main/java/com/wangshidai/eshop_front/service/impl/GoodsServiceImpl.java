@@ -15,23 +15,23 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDao goodsDao = new GoodsDaoImpl();
 
     @Override
-    public List<TypeInfo> findGoodType(Integer oneLevelGoodParentId) {
-        return goodsDao.findGoodType(oneLevelGoodParentId);
+    public List<TypeInfo> findGoodType(String rootTypeId) {
+        return goodsDao.findGoodType(rootTypeId);
     }
 
     @Override
-    public List<GoodsInfo> findGood(int type_id1, int child_type_id) {
-        return goodsDao.findGood(type_id1, child_type_id);
+    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId) {
+        return goodsDao.findGood(rootTypeId, oneLevelTypeId);
     }
 
     @Override
-    public List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword, PageInfo<GoodsInfo> pageInfo) {
-        return goodsDao.findGood(type_id1,child_type_id1,keyword,pageInfo);
+    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo) {
+        return goodsDao.findGood(rootTypeId,oneLevelTypeId,keyword,pageInfo);
     }
 
     @Override
-    public int findGoodCount(int type_id1, int child_type_id1, String keyword) {
-        return goodsDao.findGoodCount(type_id1,child_type_id1,keyword);
+    public int findGoodCount(String rootTypeId, String oneLevelTypeId, String keyword) {
+        return goodsDao.findGoodCount(rootTypeId,oneLevelTypeId,keyword);
     }
 
     @Override

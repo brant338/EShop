@@ -26,46 +26,49 @@
 
 <c:import url="/top" />
 <!--商品展示区-->
-<div id="classify" class="tg_classify">
-    <div class="tg_tab_box on">
-        <div class="tg_classify_wrap clearfix">
-            <dl class="tg_classify_all tg_classify_flat dl_left">
-                <dt class="">
-                    <i class="icon_order"></i> 书籍分类
-                </dt>
-            </dl>
-            <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
-                <c:forEach items="${rootType}" var="type">
-                    <dd class="${type.type_id == type_id ? 'on' : ''}">
-                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}">
-                            <span>${type.type_name}</span>
-                        </a>
-                    </dd>
-                </c:forEach>
-            </dl>
-        </div>
+<c:if test="${not empty type_id}">
+    <div id="classify" class="tg_classify">
+        <div class="tg_tab_box on">
+            <div class="tg_classify_wrap clearfix">
+                <dl class="tg_classify_all tg_classify_flat dl_left">
+                    <dt class="">
+                        <i class="icon_order"></i> 书籍分类
+                    </dt>
+                </dl>
+                <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
+                    <c:forEach items="${rootType}" var="type">
+                        <dd class="${type.type_id == type_id ? 'on' : ''}">
+                            <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}">
+                                <span>${type.type_name}</span>
+                            </a>
+                        </dd>
+                    </c:forEach>
+                </dl>
+            </div>
 
-        <div class="tg_classify_wrap clearfix">
-            <dl class="tg_classify_all tg_classify_flat dl_left">
-                <dt class="">
-                    <i class="icon_order"></i> ${rootLevelGood}
-                </dt>
-            </dl>
-            <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
-                <dd class="${child_type_id == 0 ? 'on' : '' }">
-                    <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}"><span>不限</span></a>
-                </dd>
-                <c:forEach items="${oneLevelGoods}" var="oneLevelGood" varStatus="i">
-                    <dd  class="${oneLevelGood.type_id == child_type_id ? 'on' : '' }">
-                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
-                            <span>${oneLevelGood.type_name}</span>
-                        </a>
+            <div class="tg_classify_wrap clearfix">
+                <dl class="tg_classify_all tg_classify_flat dl_left">
+                    <dt class="">
+                        <i class="icon_order"></i> ${rootLevelGood}
+                    </dt>
+                </dl>
+                <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
+                    <dd class="${empty child_type_id ? 'on' : '' }">
+                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}"><span>不限</span></a>
                     </dd>
-                </c:forEach>
-            </dl>
+                    <c:forEach items="${oneLevelGoods}" var="oneLevelGood" varStatus="i">
+                        <dd  class="${oneLevelGood.type_id == child_type_id ? 'on' : '' }">
+                            <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
+                                <span>${oneLevelGood.type_name}</span>
+                            </a>
+                        </dd>
+                    </c:forEach>
+                </dl>
+            </div>
         </div>
     </div>
-</div>
+</c:if>
+
 
 <div id="container">
     <div id="sort" class="tg_sort clearfix">

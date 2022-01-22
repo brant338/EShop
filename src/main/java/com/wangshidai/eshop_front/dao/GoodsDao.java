@@ -11,40 +11,40 @@ public interface GoodsDao {
     /**
      * 查询一级商品类型
      *
-     * @param oneLevelGoodParentId
+     * @param rootTypeId
      * @return
      */
-    List<TypeInfo> findGoodType(Integer oneLevelGoodParentId);
+    List<TypeInfo> findGoodType(String rootTypeId);
 
     /**
      * 查询 未添加搜索
      *
-     * @param type_id1
-     * @param child_type_id
+     * @param rootTypeId
+     * @param oneLevelTypeId
      * @return
      */
-    List<GoodsInfo> findGood(int type_id1, int child_type_id);
+    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId);
 
     /**
      * 分页查询
      *
-     * @param type_id1
-     * @param child_type_id1
+     * @param rootTypeId
+     * @param oneLevelTypeId
      * @param keyword
      * @param pageInfo
      * @return
      */
-    List<GoodsInfo> findGood(int type_id1, int child_type_id1, String keyword, PageInfo<GoodsInfo> pageInfo);
+    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo);
 
     /**
      * 查询商品总个数
      *
-     * @param type_id1
-     * @param child_type_id1
+     * @param rootTypeId
+     * @param oneLevelTypeId
      * @param keyword
      * @return
      */
-    int findGoodCount(int type_id1, int child_type_id1, String keyword);
+    int findGoodCount(String rootTypeId, String oneLevelTypeId, String keyword);
 
     /**
      * 查询单个商品

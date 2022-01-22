@@ -60,7 +60,7 @@
         <div class="logo">
             <a class="logo-bd" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
         </div>
-        <form action="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}" method="post" id="form_search">
+        <form action="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}" method="post" id="form_search">
             <div id='search'>
                 <div class="search_area">
                     <input type='submit' value='搜 索' class='btn_search' />
