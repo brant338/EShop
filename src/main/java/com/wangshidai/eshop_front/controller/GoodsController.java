@@ -1,5 +1,6 @@
 package com.wangshidai.eshop_front.controller;
 
+import com.wangshidai.eshop_front.pojo.GoodPicInfo;
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
@@ -80,9 +81,11 @@ public class GoodsController {
                                  @YockMvcAnnotation.RequestParam(name="book_id") int book_id){
 
         GoodsInfo goodDetail = goodsService.findGood(book_id);
+        List<GoodPicInfo> goodPics = goodsService.findGoodPic(book_id);
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.addObject("goodDetail",goodDetail);
+        modelAndView.addObject("goodPics",goodPics);
         return modelAndView;
     }
 }

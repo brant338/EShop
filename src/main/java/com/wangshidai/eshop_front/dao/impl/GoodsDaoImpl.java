@@ -1,6 +1,7 @@
 package com.wangshidai.eshop_front.dao.impl;
 
 import com.wangshidai.eshop_front.dao.GoodsDao;
+import com.wangshidai.eshop_front.pojo.GoodPicInfo;
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
@@ -97,6 +98,13 @@ public class GoodsDaoImpl implements GoodsDao {
     public GoodsInfo findGood(int book_id) {
         return MyJdbcUtilsV5.acquareFileldToBeanOneLine(GoodsInfo.class,
                 "select * from tb_book where book_id = ?",
+                book_id);
+    }
+
+    @Override
+    public List<GoodPicInfo> findGoodPic(int book_id) {
+        return MyJdbcUtilsV5.acquareFileldToBean(GoodPicInfo.class,
+                "select * from tb_book_pic where book_id = ?",
                 book_id);
     }
 }

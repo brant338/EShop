@@ -209,13 +209,15 @@
     <div class="goods-infor clearfix">
         <div class="goods-img">
             <div class="big-img">
-                <img src="http://182.61.33.130:80/EShopManager/upload/yz.jpg" 
+                <img src="${pageContext.request.contextPath}/upload/${goodDetail.book_logo_big}"
                 	width="420" height="420">
             </div>
             <div class="small-img">
-            	
-            	
-            		<img src="http://182.61.33.130:80/EShopManager/upload/yz.jpg" alt="" width="60" height="60" class="img-active">
+
+            		<img src="${pageContext.request.contextPath}/upload/${goodDetail.book_logo_small}" alt="" width="60" height="60" class="img-active">
+                    <c:forEach items="${goodPics}" var="goodPic">
+                        <img src="${pageContext.request.contextPath}/upload/${goodPic.pic_name}" alt="" width="60" height="60" class="img-active">
+                    </c:forEach>
             	
             </div>
         </div>

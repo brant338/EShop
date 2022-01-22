@@ -1,5 +1,6 @@
 package com.wangshidai.eshop_front.service;
 
+import com.wangshidai.eshop_front.pojo.GoodPicInfo;
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
@@ -51,4 +52,12 @@ public interface GoodsService {
      * @return
      */
     GoodsInfo findGood(int book_id);
+
+    /**
+     * 查询商品图片(小图)
+     *
+     * @param book_id
+     * @return
+     */
+    List<GoodPicInfo> findGoodPic(int book_id);
 }

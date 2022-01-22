@@ -2,6 +2,7 @@ package com.wangshidai.eshop_front.service.impl;
 
 import com.wangshidai.eshop_front.dao.GoodsDao;
 import com.wangshidai.eshop_front.dao.impl.GoodsDaoImpl;
+import com.wangshidai.eshop_front.pojo.GoodPicInfo;
 import com.wangshidai.eshop_front.pojo.GoodsInfo;
 import com.wangshidai.eshop_front.pojo.PageInfo;
 import com.wangshidai.eshop_front.pojo.TypeInfo;
@@ -36,6 +37,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public GoodsInfo findGood(int book_id) {
         return goodsDao.findGood(book_id);
+    }
+
+    @Override
+    public List<GoodPicInfo> findGoodPic(int book_id) {
+        return goodsDao.findGoodPic(book_id);
     }
 
 
