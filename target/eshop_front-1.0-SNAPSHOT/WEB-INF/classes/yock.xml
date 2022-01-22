@@ -11,7 +11,10 @@
 	
 	<!-- 你每一个控制器中有哪些路径 -->
 	<controller-mappings>
+<!--		商品有关-->
 		<action name="goodsController" path="/product/type.action" />
+		<action name="goodsController" path="/product/good.action" />
+<!--		用户登录有关-->
 		<action name="userController" path="/user/login.action" />
 	</controller-mappings>
 		

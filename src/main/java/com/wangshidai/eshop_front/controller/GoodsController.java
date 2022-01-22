@@ -72,4 +72,16 @@ public class GoodsController {
 
         return modelAndView;
     }
+
+    @YockMvcAnnotation.RequestMapping("/good.action")
+    @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/product_info.jsp")
+    public ModelAndView findGood(HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 @YockMvcAnnotation.RequestParam(name="book_id") int book_id){
+
+
+
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
 }

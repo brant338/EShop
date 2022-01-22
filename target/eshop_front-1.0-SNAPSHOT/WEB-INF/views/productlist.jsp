@@ -161,7 +161,7 @@
                     </c:if>
                 </c:set>
                 <div class="per" ${isRight}>
-                    <a target="_blank" href="${pageContext.request.contextPath}/user/login.action" class="img_link">
+                    <a target="_blank" href="${pageContext.request.contextPath}/product/good.action?book_id=${goodInfo.book_id}" class="img_link">
                         <img src="${pageContext.request.contextPath}/upload/${goodInfo.book_logo_small}" original="#" alt="#" class="lazy">
                     </a>
                     <div class="foot">
