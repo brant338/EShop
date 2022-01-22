@@ -5,12 +5,14 @@
 	<!-- 配置你的控制器类有哪些 -->
 	<controller-class>
 		<controller name="goodsController" className="com.wangshidai.eshop_front.controller.GoodsController" />
+		<controller name="userController" className="com.wangshidai.eshop_front.controller.UserController" />
 	</controller-class>
 	
 	
 	<!-- 你每一个控制器中有哪些路径 -->
 	<controller-mappings>
 		<action name="goodsController" path="/product/type.action" />
+		<action name="userController" path="/user/login.action" />
 	</controller-mappings>
 		
 		
