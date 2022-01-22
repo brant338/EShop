@@ -39,6 +39,8 @@ public class GoodsDaoImpl implements GoodsDao {
         String sql = "  ";
         ArrayList<Object> goodsInfos = new ArrayList<>();
         //区分首页搜索,商品详情搜索还是非首页搜索
+        //首页搜索,商品详情搜索指在全部商品下搜索
+        //非首页搜索是指在0级分类下搜索
         if(rootTypeId != null && !rootTypeId.isEmpty()){
             if(keyword == null || keyword.isEmpty()){
                 sql = " SELECT * FROM `tb_book` where type_id = ?";
@@ -82,6 +84,8 @@ public class GoodsDaoImpl implements GoodsDao {
         String sql = "  ";
         ArrayList<Object> goodsInfos = new ArrayList<>();
         //区分首页搜索,商品详情搜索还是非首页搜索
+        //首页搜索,商品详情搜索指在全部商品下搜索
+        //非首页搜索是指在0级分类下搜索
         if(rootTypeId != null && !rootTypeId.isEmpty()){
             if(keyword == null || keyword.isEmpty()){
                 sql = " SELECT count(*) FROM `tb_book` where type_id = ? ";
