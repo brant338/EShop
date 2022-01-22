@@ -213,31 +213,30 @@
                 	width="420" height="420">
             </div>
             <div class="small-img">
-            	
-            	
+
             		<img src="http://182.61.33.130:80/EShopManager/upload/yz.jpg" alt="" width="60" height="60" class="img-active">
             	
             </div>
         </div>
         <div class="goods-para">
-            <h2 class="goods-title">余罪：我的刑侦笔记(第一季)</h2>
+            <h2 class="goods-title">${goodDetail.book_name}</h2>
             <div class="goods-price">
                 <table width="520" cellspacing="10">
                     <tr>
                         <td width="70">作者</td>
-                        <td>常书欣</td>
+                        <td>${goodDetail.book_author}</td>
                     </tr>
                     <tr>
                         <td>价格</td>
-                        <td style="text-decoration: line-through;">￥192.0</td>
+                        <td style="text-decoration: line-through;">${goodDetail.book_price_old}</td>
                     </tr>
                     <tr>
                         <td>促销价</td>
-                        <td style="color: red; font-size: 30px; font-weight: bold;">￥133.3</td>
+                        <td style="color: red; font-size: 30px; font-weight: bold;">${goodDetail.book_price}</td>
                     </tr>
                     <tr>
                         <td>出版社</td>
-                        <td>海南出版社</td>
+                        <td>${goodDetail.book_press}</td>
                     </tr>
                 </table>
             </div>
@@ -252,7 +251,7 @@
                         </div>
 
                     </li>
-                    <li>库存<span class="total"> 10 </span>件</li>
+                    <li>库存<span class="total"> ${goodDetail.store_count} </span>件</li>
                 </ul>
                 <div class="buy-control clearfix">
                     <a class="buy-now" href="#">立即购买</a>
@@ -269,11 +268,8 @@
         <ol class="detail-content">
         	<!-- 商品详情 -->
             <li style="display: block;" class="content-item">
-            	
-            	本书为您揭开的是一张令人触目惊心的当下社会犯罪网络。从混迹人群中的扒手，到躲在深山老林里的悍匪，从横行街头的流氓，到逡巡在海岸线边缘的毒枭；他们似乎离我们很远，似乎又很近，看似悄无声息，却又如影随形；作者所描写的，正是这个光怪陆离而又真实存在的地下世界。
-　　警校学员余罪，在通过一次意外的选拔之后，被丢进了一间住满凶神恶煞的罪犯的牢房，他迅速发现，要在这个凶险万状的环境中活下来，自己必须比毒贩更奸诈，比窃贼更狡猾，比匪徒更残忍。他不仅要用罪犯的思维去理解犯罪，还要用罪犯的手段去对抗犯罪，更要和罪犯一样突破种种底线。在日复一日命悬一线的斗争中，余罪一步步走到了法律的边缘，他也开始怀疑：自己到底是在制止犯罪，还是也在犯罪…… 
-　　小说格局开阔，文笔生动，不仅向你打开了一个前所未闻的地下世界，其中近百个性格鲜明的警察和罪犯形象，更是栩栩如生，犹在眼前。
-　　翻开本书，进入我们这个时代的灰色地带。
+
+                ${goodDetail.book_description}
             	
             </li>
             

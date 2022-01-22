@@ -92,4 +92,11 @@ public class GoodsDaoImpl implements GoodsDao {
         }
         return ((Long)MyJdbcUtilsV5.acquireSqlQuaryOne(sql,goodsInfos.toArray())).intValue();
     }
+
+    @Override
+    public GoodsInfo findGood(int book_id) {
+        return MyJdbcUtilsV5.acquareFileldToBeanOneLine(GoodsInfo.class,
+                "select * from tb_book where book_id = ?",
+                book_id);
+    }
 }

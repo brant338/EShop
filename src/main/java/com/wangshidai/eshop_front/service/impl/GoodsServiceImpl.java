@@ -33,5 +33,10 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.findGoodCount(type_id1,child_type_id1,keyword);
     }
 
+    @Override
+    public GoodsInfo findGood(int book_id) {
+        return goodsDao.findGood(book_id);
+    }
+
 
 }

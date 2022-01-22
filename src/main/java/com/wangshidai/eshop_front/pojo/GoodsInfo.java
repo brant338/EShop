@@ -1,13 +1,24 @@
 package com.wangshidai.eshop_front.pojo;
 
+import java.sql.Timestamp;
+
 public class GoodsInfo {
-    private Integer book_id;
-    private String book_name;
-    private String book_logo_small;
-    private String book_logo_big;
-    private Double book_price;
-    private Double book_price_old;
-    private String book_author;
+    private Integer book_id; //书籍ID
+    private String book_name; //书籍名称
+    private String book_logo_small; //书籍logo图(小)
+    private String book_logo_big; //书籍logo图(大)
+    private Double book_price; //出售价
+    private Double book_price_old; //原价
+    private String book_author; //作者
+    private String book_description; //商品详情概述
+    private String book_press; //出版社
+    private Integer type_id; //分类ID
+    private Timestamp book_date; //添加书籍时间
+    private Integer store_count; //库存
+    private Integer status; //1上架 0下架
+    private Integer is_new; //0非新品 其他任意正整数代表新品
+    private Integer is_hot; //0非热销 其他任意正整数代表热销
+    private Integer is_garbage; //0代表不是垃圾 1代表垃圾
 
     public Integer getBook_id() {
         return book_id;
@@ -65,6 +76,78 @@ public class GoodsInfo {
         this.book_author = book_author;
     }
 
+    public String getBook_description() {
+        return book_description;
+    }
+
+    public void setBook_description(String book_description) {
+        this.book_description = book_description;
+    }
+
+    public String getBook_press() {
+        return book_press;
+    }
+
+    public void setBook_press(String book_press) {
+        this.book_press = book_press;
+    }
+
+    public Integer getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(Integer type_id) {
+        this.type_id = type_id;
+    }
+
+    public Timestamp getBook_date() {
+        return book_date;
+    }
+
+    public void setBook_date(Timestamp book_date) {
+        this.book_date = book_date;
+    }
+
+    public Integer getStore_count() {
+        return store_count;
+    }
+
+    public void setStore_count(Integer store_count) {
+        this.store_count = store_count;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getIs_new() {
+        return is_new;
+    }
+
+    public void setIs_new(Integer is_new) {
+        this.is_new = is_new;
+    }
+
+    public Integer getIs_hot() {
+        return is_hot;
+    }
+
+    public void setIs_hot(Integer is_hot) {
+        this.is_hot = is_hot;
+    }
+
+    public Integer getIs_garbage() {
+        return is_garbage;
+    }
+
+    public void setIs_garbage(Integer is_garbage) {
+        this.is_garbage = is_garbage;
+    }
+
     @Override
     public String toString() {
         return "GoodsInfo{" +
@@ -75,6 +158,15 @@ public class GoodsInfo {
                 ", book_price=" + book_price +
                 ", book_price_old=" + book_price_old +
                 ", book_author='" + book_author + '\'' +
+                ", book_description='" + book_description + '\'' +
+                ", book_press='" + book_press + '\'' +
+                ", type_id=" + type_id +
+                ", book_date=" + book_date +
+                ", store_count=" + store_count +
+                ", status=" + status +
+                ", is_new=" + is_new +
+                ", is_hot=" + is_hot +
+                ", is_garbage=" + is_garbage +
                 '}';
     }
 }

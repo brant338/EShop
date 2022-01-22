@@ -79,9 +79,10 @@ public class GoodsController {
                                  HttpServletResponse response,
                                  @YockMvcAnnotation.RequestParam(name="book_id") int book_id){
 
-
-
+        GoodsInfo goodDetail = goodsService.findGood(book_id);
         ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("goodDetail",goodDetail);
         return modelAndView;
     }
 }

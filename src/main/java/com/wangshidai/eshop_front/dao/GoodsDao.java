@@ -44,4 +44,12 @@ public interface GoodsDao {
      * @return
      */
     int findGoodCount(int type_id1, int child_type_id1, String keyword);
+
+    /**
+     * 查询单个商品
+     *
+     * @param book_id
+     * @return
+     */
+    GoodsInfo findGood(int book_id);
 }
