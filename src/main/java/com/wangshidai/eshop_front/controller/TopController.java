@@ -22,6 +22,7 @@ public class TopController extends HttpServlet {
         super.service(request, response);
         String parentId = request.getParameter("parentId");
         String type_id = request.getParameter("type_id");
+        String goodDetailMenu = request.getParameter("goodDetailMenu");
 
         int parent_id1;
         int type_id1;
@@ -38,6 +39,7 @@ public class TopController extends HttpServlet {
         List<TypeInfo> rootType = topService.findAll(parent_id1);
         request.setAttribute("rootType",rootType);
         request.setAttribute("type_id",type_id1);
+        request.setAttribute("goodDetailMenu",goodDetailMenu);
         //请求包含
         request.getRequestDispatcher("WEB-INF/views/top.jsp").include(request,response);
     }

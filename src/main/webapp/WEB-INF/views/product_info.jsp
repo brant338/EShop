@@ -203,78 +203,9 @@
 <body>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/style.css" type="text/css" />
-	<div id="site_nav">
-			<div class="sn_container clearfix">
-				<ul class="tg_tools fr">
-					<li class="no-hover">
-						<a id="msg_notify" class="msg_notify" href="member_message.html"></a>
-					</li>
-					<li class='box_color nav_home'>
-						<span><a href="member_set.html"><span>我的账户</span></a></span><b class="icon"></b>
-						<ul>
-							<li>
-								<a href="history.html"><span>浏览记录</span></a>
-							</li>
 
-							<li>
-								<a href="cart.html"><span>购物车(10)</span></a>
-							</li>
-							<li>
-								<a href="#"><span>退出登录</span></a>
-							</li>
-						</ul>
-					</li>
-					<li class="tg-line icon"></li>
-					<li class='box_color'>
-						<span>帮助中心</span><b class="icon"></b>
-						<ul>
-							<li>
-								<a href="#"><span>联系我们</span></a>
-							</li>
-							<li>
-								<a href="#"><span>关于我们</span></a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="tg_tools fl" id="login_area">
-					<li class="tg_tools_home no-hover"><i class="icon-more"></i><span><a href="${pageContext.request.contextPath}/">eshop首页</a></span></li>
-					<li class="tg-line icon"></li>
-					<li class="no-hover nologin"><span><a href="reg.html">新用户注册</a></span></li>
-					<li class="tg-line icon"></li>
-					<li class="no-hover nologin"><span><a href="login.html">亲，请先登录！</a></span></li>
-				</ul>
-			</div>
-		</div>
-		<div id="header">
-			<div class="tg_tools_home">
-				<div class="logo">
-					<a class="logo-bd" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
-				</div>
-				<form action="product_list.html" method="post" id="form_search" onsubmit="return searchSub()">
-					<div id='search'>
-						<div class="search_area">
-							<input type='submit' value='搜 索' class='btn_search' />
-							<div class="search_select">
-								<span class="icon-search"></span>
-							</div>
-							<input type='text' name="keyword" value='请输入搜索内容' class="search_input" autocomplete="off" id="search_input" data-default="请输入搜索内容" 
-							onblur="checkInputBlur($(this))" onfocus="checkInputFocus($(this))" />
-						</div>
-						<div class="search_box hide" id="search_box"></div>
-						<div class='search_keywords'>
-							<span>热门搜索：</span>
-							<a href="product_list.jsp?keyword=手机" class="red">手机</a>
-							<a href="product_list.jsp?keyword=盗墓笔记">盗墓笔记</a>
-							<a href="product_list.jsp?keyword=bootstrap">bootstrap</a>
-							<a href="product_list.jsp?keyword=鲁滨逊漂流记">鲁滨逊漂流记</a>
-							<a href="product_list.jsp?keyword=疯狂java" class="red">疯狂java</a>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	
+    <c:import url="/top?goodDetailMenu=1" />
+
     <div class="goods-infor clearfix">
         <div class="goods-img">
             <div class="big-img">

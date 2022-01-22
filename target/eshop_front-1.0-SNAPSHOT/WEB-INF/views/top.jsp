@@ -47,7 +47,7 @@
             </li>
         </ul>
         <ul class="tg_tools fl" id="login_area">
-            <li class="tg_tools_home no-hover"><i class="icon-more"></i><span><a href="index.html">eshop首页</a></span></li>
+            <li class="tg_tools_home no-hover"><i class="icon-more"></i><span><a href="${pageContext.request.contextPath}/">eshop首页</a></span></li>
             <li class="tg-line icon"></li>
             <li class="no-hover nologin"><span><a href="reg.html">新用户注册</a></span></li>
             <li class="tg-line icon"></li>
@@ -58,7 +58,7 @@
 <div id="header">
     <div class="tg_tools_home">
         <div class="logo">
-            <a class="logo-bd" href="index.html"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
+            <a class="logo-bd" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
         </div>
         <form action="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}" method="post" id="form_search">
             <div id='search'>
@@ -83,16 +83,20 @@
         </form>
     </div>
 </div>
-<div id='nav' class='nav'>
-    <div class='nav_main clearfix' id="topMenu">
-        <a href="${pageContext.request.contextPath}/" class="menu ${type_id == 0 ? 'current' : ''}">首 页</a>
-        <c:forEach items="${rootType}" var="type" >
-        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}"
-           class="menu ${type_id == type.type_id ? 'current' : ''} "> ${type.type_name}
-        </a>
-        </c:forEach>
+
+<c:if test="${empty goodDetailMenu}">
+    <div id='nav' class='nav'>
+        <div class='nav_main clearfix' id="topMenu">
+            <a href="${pageContext.request.contextPath}/" class="menu ${type_id == 0 ? 'current' : ''}">首 页</a>
+            <c:forEach items="${rootType}" var="type" >
+                <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}"
+                   class="menu ${type_id == type.type_id ? 'current' : ''} "> ${type.type_name}
+                </a>
+            </c:forEach>
+        </div>
     </div>
-</div>
+</c:if>
+
 
 </body>
 </html>
