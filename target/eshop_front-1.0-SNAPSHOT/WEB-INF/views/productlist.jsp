@@ -52,11 +52,11 @@
                 </dt>
             </dl>
             <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
-                <dd class="on">
-                    <a href="product_list.html"><span>不限</span></a>
+                <dd class="${child_type_id == 0 ? 'on' : '' }">
+                    <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}"><span>不限</span></a>
                 </dd>
-                <c:forEach items="${oneLevelGoods}" var="oneLevelGood">
-                    <dd class="">
+                <c:forEach items="${oneLevelGoods}" var="oneLevelGood" varStatus="i">
+                    <dd  class="${oneLevelGood.type_id == child_type_id ? 'on' : '' }">
                         <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
                             <span>${oneLevelGood.type_name}</span>
                         </a>
