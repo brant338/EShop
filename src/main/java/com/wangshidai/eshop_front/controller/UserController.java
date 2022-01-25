@@ -2,18 +2,28 @@ package com.wangshidai.eshop_front.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
+import com.alibaba.fastjson.JSON;
+import com.wangshidai.eshop_front.dao.UserDao;
+import com.wangshidai.eshop_front.entity.ResultBean;
+import com.wangshidai.eshop_front.pojo.UserInfo;
+import com.wangshidai.eshop_front.service.UserService;
+import com.wangshidai.eshop_front.service.impl.UserServiceImpl;
 import org.lanqiao.mvc.entity.ModelAndView;
 import org.lanqiao.mvc.entity.YockMvcAnnotation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @YockMvcAnnotation.Controller("/user")
 public class UserController {
+
+    private UserService userService = new UserServiceImpl();
+
     @YockMvcAnnotation.RequestMapping("/showLogin.action")
     @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/sign-in.jsp")
-    public ModelAndView login(HttpServletRequest request,
+    public ModelAndView showLogin(HttpServletRequest request,
                               HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView();
         return  modelAndView;
@@ -34,4 +44,58 @@ public class UserController {
         }
 
     }
-}
+    @YockMvcAnnotation.RequestMapping("/check_captcha.action")
+    @YockMvcAnnotation.ResponseVoid
+    public void checkCaptcha(HttpServletRequest request,
+                               HttpServletResponse response,
+                               @YockMvcAnnotation.RequestParam(name = "authCode") String authCode){
+        try {
+            //过滤编码格式ֵ
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=UTF-8");
+            //取出验证码
+            ShearCaptcha captcha = (ShearCaptcha)request.getSession().getAttribute("captcha");
+            if(captcha.verify(authCode)){
+                response.getWriter().write(JSON.toJSONString(new ResultBean(true,"验证码正确")));
+            }else{
+                response.getWriter().write(JSON.toJSONString(new ResultBean(false,"验证码错误")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @YockMvcAnnotation.RequestMapping("/login.action")
+    @YockMvcAnnotation.ResponseVoid
+    public void login(HttpServletRequest request,
+                      HttpServletResponse response,
+                      @YockMvcAnnotation.RequestParam(name = "username") String username,
+                      @YockMvcAnnotation.RequestParam(name = "pwd") String pwd){
+        try {
+            //过滤编码格式ֵ
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=UTF-8");
+
+            //封装数据
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUser_name(username);
+            userInfo.setUser_pwd(pwd);
+
+            UserInfo userInfo1 = userService.findUser(userInfo);
+
+            System.out.println(userInfo1);
+            //响应数据
+            if(userInfo1.getUser_name() != null){
+                response.getWriter().write(JSON.toJSONString(new ResultBean(true,"查询用户成功")));
+            }else{
+                response.getWriter().write(JSON.toJSONString(new ResultBean(false,"用户名或密码错误")));
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }}
