@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/public/css/theme.css">
     <script src="${pageContext.request.contextPath }/public/js/jquery.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath }/public/js/tooltips.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath }/public/js/common.js" type="text/javascript"></script>
+    <%--<script src="${pageContext.request.contextPath }/public/js/common.js" type="text/javascript"></script>--%>
 
   </head>
 
@@ -46,7 +46,7 @@
                     	title="ⓘ提示"
             		  	data-container="body" data-toggle="popover" data-placement="right"
             			data-content="验证码错误" />
-                    <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/verifyCodeServlet" id="vCode" width="180px" height="50px"  /></a>
+                    <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha.action" id="vCode" width="180px" height="50px"  /></a>
                     
                     <label><hr /></label>
                     <a href="javascript:sublogin()" class="btn btn-primary pull-right">登录</a>
@@ -68,9 +68,38 @@
         });
         
         function changeCode(){
-    		$("#vCode").attr("src","${pageContext.request.contextPath }/verifyCodeServlet?uuid="+new Date().getTime());
+    		$("#vCode").attr("src","${pageContext.request.contextPath }/user/captcha.action?uuid="+new Date().getTime());
     	}
-    	
+
+    	$("#username").blur(function () {
+            var val = $(this).val();
+            if(val==""){
+                $(this).attr("data-content","用户名不能为空");
+                $(this).popover("show");
+            }else{
+                $(this).popover("destory");
+            }
+        })
+        $("#pwd").blur(function () {
+            var val = $(this).val();
+            if(val==""){
+                $(this).attr("data-content","密码不能为空");
+                $(this).popover("show");
+            }else{
+                $(this).popover("destory");
+            }
+        })
+        $("#authCode").blur(function () {
+            var val = $(this).val();
+            if(val==""){
+                $(this).attr("data-content","验证码不能为空");
+                $(this).popover("show");
+
+            }else{
+                $(this).popover("destory");
+            }
+        })
+
     	//回车事件
     	$(function(){
     		

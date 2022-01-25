@@ -15,7 +15,8 @@
 		<action name="goodsController" path="/product/type.action" />
 		<action name="goodsController" path="/product/good.action" />
 <!--		用户登录有关-->
-		<action name="userController" path="/user/login.action" />
+		<action name="userController" path="/user/showLogin.action" />
+		<action name="userController" path="/user/captcha.action" />
 	</controller-mappings>
 		
 		

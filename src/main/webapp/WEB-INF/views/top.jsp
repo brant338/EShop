@@ -51,7 +51,7 @@
             <li class="tg-line icon"></li>
             <li class="no-hover nologin"><span><a href="reg.html">新用户注册</a></span></li>
             <li class="tg-line icon"></li>
-            <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/login.action">亲，请先登录！</a></span></li>
+            <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">亲，请先登录！</a></span></li>
         </ul>
     </div>
 </div>
