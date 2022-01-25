@@ -19,6 +19,7 @@
 		<action name="userController" path="/user/captcha.action" />
 		<action name="userController" path="/user/check_captcha.action" />
 		<action name="userController" path="/user/login.action" />
+		<action name="userController" path="/user/logOut.action" />
 	</controller-mappings>
 		
 		

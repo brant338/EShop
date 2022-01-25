@@ -89,6 +89,10 @@ public class UserController {
             //响应数据
             if(userInfo1.getUser_name() != null){
                 response.getWriter().write(JSON.toJSONString(new ResultBean(true,"查询用户成功")));
+
+                //保存用户信息至session中
+                request.getSession().setAttribute("user",userInfo);
+
             }else{
                 response.getWriter().write(JSON.toJSONString(new ResultBean(false,"用户名或密码错误")));
             }
@@ -98,4 +102,16 @@ public class UserController {
             e.printStackTrace();
         }
 
-    }}
+    }
+
+    @YockMvcAnnotation.RequestMapping("/logOut.action")
+    @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/sign-in.jsp")
+    public ModelAndView logOut(HttpServletRequest request,
+                       HttpServletResponse response){
+
+        request.getSession().removeAttribute("user");
+
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+}

@@ -29,7 +29,7 @@
                         <a href="cart.html"><span>购物车(10)</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>退出登录</span></a>
+                        <a href="${pageContext.request.contextPath}/user/logOut.action"><span>退出登录</span></a>
                     </li>
                 </ul>
             </li>
@@ -49,10 +49,19 @@
         <ul class="tg_tools fl" id="login_area">
             <li class="tg_tools_home no-hover"><i class="icon-more"></i><span><a href="${pageContext.request.contextPath}/">eshop首页</a></span></li>
             <li class="tg-line icon"></li>
-            <li class="no-hover nologin"><span><a href="reg.html">新用户注册</a></span></li>
-            <li class="tg-line icon"></li>
-            <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">亲，请先登录！</a></span></li>
-        </ul>
+
+            <c:if test="${ empty sessionScope.user.user_name}">
+                <li class="no-hover nologin"><span><a href="reg.html">注册</a></span></li>
+                <li class="tg-line icon"></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">亲，请先登录！</a></span></li>
+            </c:if>
+            <c:if test="${ !empty sessionScope.user.user_name }">
+                <li class="no-hover nologin"><span><a href="reg.html">欢迎您</a></span></li>
+                <li class="tg-line icon"></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">${sessionScope.user.user_name }</a></span></li>
+            </c:if>
+
+           </ul>
     </div>
 </div>
 <div id="header">
