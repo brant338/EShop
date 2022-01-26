@@ -19,7 +19,7 @@
                 <a id="msg_notify" class="msg_notify" href="member_message.html"></a>
             </li>
             <li class='box_color nav_home'>
-                <span><a href="member_set.html"><span>我的账户</span></a></span><b class="icon"></b>
+                <span><a href="${pageContext.request.contextPath}/user/member.action"><span>我的账户</span></a></span><b class="icon"></b>
                 <ul>
                     <li>
                         <a href="history.html"><span>浏览记录</span></a>

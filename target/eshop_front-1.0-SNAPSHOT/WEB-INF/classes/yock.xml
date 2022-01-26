@@ -4,8 +4,8 @@
 
 	<!-- 配置你的控制器类有哪些 -->
 	<controller-class>
-		<controller name="goodsController" className="com.wangshidai.eshop_front.controller.GoodsController" />
-		<controller name="userController" className="com.wangshidai.eshop_front.controller.UserController" />
+		<controller name="goodsController" className="com.wangshidai.eshopFront.controller.GoodsController" />
+		<controller name="userController" className="com.wangshidai.eshopFront.controller.UserController" />
 	</controller-class>
 	
 	
@@ -20,6 +20,7 @@
 		<action name="userController" path="/user/check_captcha.action" />
 		<action name="userController" path="/user/login.action" />
 		<action name="userController" path="/user/logOut.action" />
+		<action name="userController" path="/user/member.action" />
 	</controller-mappings>
 		
 		

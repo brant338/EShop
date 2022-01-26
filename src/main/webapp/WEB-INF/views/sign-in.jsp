@@ -120,8 +120,11 @@
                                //验证用户名和密码
                                $.post(url,data,function (response1) {
                                    if(response1.flag){
+                                       console.log(response1)
+                                       var loginUrl = response1.data.notify_url
+
                                        //登录成功
-                                       location.href = "${pageContext.request.contextPath}/";
+                                       location.href = loginUrl;
 
                                    }else{
 
