@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/member.css" />
 </head>
 <body>
-<c:import url="/top" />
+<c:import url="/top?goodDetailMenu=1" />
 
 	<div class="container clearfix">
 		<div class="cart_main">

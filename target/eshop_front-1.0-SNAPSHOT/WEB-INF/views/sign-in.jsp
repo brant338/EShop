@@ -47,7 +47,7 @@
                     <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha.action" id="vCode" width="180px" height="50px"  /></a>
                     
                     <label><hr /></label>
-                    <a href="javascript:;" class="btn btn-primary pull-right" id="submit">登录</a>
+                    <a href="javascript:;" class="btn btn-primary pull-right" id="submit1">登录</a>
                     <label class="remember-me"><input type="checkbox" id="rememberme">两周内免登录</label>
                     
                     <div class="clearfix"></div>
@@ -57,7 +57,7 @@
         <p><a href="#">忘记密码?</a></p>
     </div>
 </div>
-    <script src="${pageContext.request.contextPath }/public/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath }/public/js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath }/public/js/tooltips.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/public/js/bootstrap.js" type="text/javascript"></script>
     <%--<script src="${pageContext.request.contextPath }/public/js/common.js" type="text/javascript"></script>--%>
@@ -67,7 +67,11 @@
         $(function() {
             $('.demo-cancel-click').click(function(){return false;});
         });*/
-        
+
+        var isValidateUsername = false;
+        var isValidatePwd = false;
+        var isValidateCode = false;
+
         function changeCode(){
     		$("#vCode").attr("src","${pageContext.request.contextPath }/user/captcha.action?uuid="+new Date().getTime());
     	}
@@ -77,8 +81,10 @@
             if(val==""){
                 $(this).attr("data-content","用户名不能为空");
                 $(this).popover("show");
+                isValidateUsername = false;
             }else{
                 $(this).popover("destroy");
+                isValidateUsername = true;
             }
         })
         $("#pwd").blur(function () {
@@ -86,8 +92,10 @@
             if(val==""){
                 $(this).attr("data-content","密码不能为空");
                 $(this).popover("show");
+                isValidatePwd = false;
             }else{
                 $(this).popover("destroy");
+                isValidatePwd = true;
             }
         })
         $("#authCode").blur(function () {
@@ -95,52 +103,43 @@
             if(val==""){
                 $(this).attr("data-content","验证码不能为空");
                 $(this).popover("show");
-
+                isValidateCode = false;
 
             }else{
+
                 $(this).popover("destroy")
-                   $("#submit").click(function(){
+                isValidateCode = true;
+                //当用户名,密码,验证码都不为空则可以触发点击事件
+                if(isValidateUsername && isValidatePwd && isValidateCode){
+                    //解决ajax一次请求对此回调问题
+                    $("#submit1").off().on("click",function(){
 
-                       var url = "${pageContext.request.contextPath}/user/check_captcha.action";
-                       var username = $("#username").val();
-                       var pwd = $("#pwd").val();
-                       val = $("#authCode").val();
+                        var url = "${pageContext.request.contextPath}/user/login.action";
+                        var username = $("#username").val();
+                        var pwd = $("#pwd").val();
+                        val = $("#authCode").val();
 
-                       var data = {
-                           username: username,
-                           pwd: pwd,
-                           authCode: val
-                       };
-                       //验证码
-                       $.post(url,data,function (response) {
+                        var data = {
+                            username: username,
+                            pwd: pwd,
+                            authCode: val
+                        };
+                        $.post(url,data,function (result) {
+                            if(result.flag){
 
-                           console.log(response);
-                           if(response.flag){
-                               url = "${pageContext.request.contextPath}/user/login.action";
-                               //验证用户名和密码
-                               $.post(url,data,function (response1) {
-                                   if(response1.flag){
-                                       console.log(response1)
-                                       var loginUrl = response1.data.notify_url
+                                var notifyUrl = result.data.notify_url;
+                                console.log(notifyUrl)
+                                location.href = notifyUrl;
 
-                                       //登录成功
-                                       location.href = loginUrl;
+                            }else{
+                                alert(result.data)
+                                //验证码更新
+                                changeCode()
+                            }
+                        },"json")
 
-                                   }else{
-
-                                       alert(response1.data)
-                                       //验证码更新
-                                       changeCode()
-
-                                   }
-                               },"json")
-                           }else{
-                               alert(response.data)
-                               //验证码更新
-                               changeCode()
-                           }
-                       },"json")
                     });
+                }
             }
         })
     </script>

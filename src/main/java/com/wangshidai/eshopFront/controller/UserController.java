@@ -71,6 +71,7 @@ public class UserController {
     @YockMvcAnnotation.ResponseVoid
     public void login(HttpServletRequest request,
                       HttpServletResponse response,
+                      @YockMvcAnnotation.RequestParam(name = "authCode") String authCode,
                       @YockMvcAnnotation.RequestParam(name = "username") String username,
                       @YockMvcAnnotation.RequestParam(name = "pwd") String pwd){
         try {
@@ -88,28 +89,32 @@ public class UserController {
 
             UserInfo userInfo1 = userService.findUser(userInfo);
 
-            System.out.println(userInfo1);
-            //响应数据
-            if(userInfo1.getUser_name() != null){
+            //取出验证码
+            ShearCaptcha captcha = (ShearCaptcha)request.getSession().getAttribute("captcha");
+            if(captcha.verify(authCode)){
+                //响应数据
+                if(userInfo1.getUser_name() != null){
+                    //保存用户信息至session中
+                    request.getSession().setAttribute("user",userInfo);
 
+                    String loginFrontURL = (String) request.getSession().getAttribute("loginFrontURL");
+                    if(loginFrontURL != null){
+                        returnMap.put("notify_url",loginFrontURL);
+                        request.getSession().removeAttribute("loginFrontURL");
+                    }else{
+                        returnMap.put("notify_url","/eshop_front");
+                    }
 
-                //保存用户信息至session中
-                request.getSession().setAttribute("user",userInfo);
+                    response.getWriter().write(JSON.toJSONString(new ResultBean(true,returnMap,"查询用户成功")));
 
-                String loginFrontURL = (String) request.getSession().getAttribute("loginFrontURL");
-                if(loginFrontURL != null){
-                    returnMap.put("notify_url",loginFrontURL);
-                    request.getSession().removeAttribute("loginFrontURL");
                 }else{
-                    returnMap.put("notify_url","/eshop_front");
+                    response.getWriter().write(JSON.toJSONString(new ResultBean(false,"用户名或密码错误")));
                 }
-
-                response.getWriter().write(JSON.toJSONString(new ResultBean(true,returnMap,"查询用户成功")));
-
-
             }else{
-                response.getWriter().write(JSON.toJSONString(new ResultBean(false,"用户名或密码错误")));
+                response.getWriter().write(JSON.toJSONString(new ResultBean(false,"验证码错误")));
             }
+
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
