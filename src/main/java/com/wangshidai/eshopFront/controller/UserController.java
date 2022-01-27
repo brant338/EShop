@@ -8,6 +8,7 @@ import com.wangshidai.eshopFront.entity.ResultBean;
 import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
 import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
+import com.wangshidai.eshopFront.utils.JsonUtils;
 import org.lanqiao.mvc.entity.ModelAndView;
 import org.lanqiao.mvc.entity.YockMvcAnnotation;
 
@@ -144,10 +145,32 @@ public class UserController {
     public ModelAndView register(HttpServletRequest request,
                          HttpServletResponse response){
 
-
-
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
+
+    }
+    @YockMvcAnnotation.RequestMapping("/newRegister.action")
+    @YockMvcAnnotation.ResponseVoid
+    public void newRegister(HttpServletRequest request,
+                            HttpServletResponse response,
+                            @YockMvcAnnotation.RequestParam(name = "user_email") String user_email,
+                            @YockMvcAnnotation.RequestParam(name = "user_name") String user_name,
+                            @YockMvcAnnotation.RequestParam(name = "user_pwd") String user_pwd,
+                            @YockMvcAnnotation.RequestParam(name = "user_head") String user_head,
+                            @YockMvcAnnotation.RequestParam(name = "user_sex") String user_sex,
+                            @YockMvcAnnotation.RequestParam(name = "password2") String password2,
+                            @YockMvcAnnotation.RequestParam(name = "province_id") String province_id,
+                            @YockMvcAnnotation.RequestParam(name = "city_id") String city_id,
+                            @YockMvcAnnotation.RequestParam(name = "area_id") String area_id,
+                            @YockMvcAnnotation.RequestParam(name = "user_address") String user_address,
+                            @YockMvcAnnotation.RequestParam(name = "question_id") String question_id,
+                            @YockMvcAnnotation.RequestParam(name = "question_answer") String question_answer,
+                            @YockMvcAnnotation.RequestParam(name = "is_activated") String is_activated,
+                            @YockMvcAnnotation.RequestParam(name = "is_online") String is_online,
+                            @YockMvcAnnotation.RequestParam(name = "time") String time,
+                            @YockMvcAnnotation.RequestParam(name = "authCode") String authCode){
+
+
 
     }
 

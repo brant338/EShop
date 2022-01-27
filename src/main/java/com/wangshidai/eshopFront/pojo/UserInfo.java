@@ -22,6 +22,8 @@ public class UserInfo {
     private Double lat;            //维度
     private Double lng;            //经度
 
+    private String password2;      //重复密码
+
     public Integer getUser_id() {
         return user_id;
     }
@@ -166,6 +168,14 @@ public class UserInfo {
         this.lng = lng;
     }
 
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -187,6 +197,7 @@ public class UserInfo {
                 ", area_id='" + area_id + '\'' +
                 ", lat=" + lat +
                 ", lng=" + lng +
+                ", password2='" + password2 + '\'' +
                 '}';
     }
 }

@@ -102,7 +102,7 @@
                     <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha.action" id="vCode" width="180px" height="50px"  /></a>
                     
                     <label><hr /></label>
-                    <a href="javascript:subReg()" class="btn btn-primary pull-right">注册</a>
+                    <a href="javascript:sublogin();" class="btn btn-primary pull-right">注册</a>
                     
                     
                     <div class="clearfix"></div>
@@ -126,9 +126,13 @@
     	}
 
     	function sublogin(){
+
+
+
+
 			$("#email").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var user_email = $(this).val();
+				if(user_email==""){
 					$(this).attr("data-content","邮箱不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -138,8 +142,8 @@
 				}
 			})
 			$("#username").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var user_name = $(this).val();
+				if(user_name==""){
 					$(this).attr("data-content","用户名不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -149,8 +153,8 @@
 				}
 			})
 			$("#password").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var user_pwd  = $(this).val();
+				if(user_pwd==""){
 					$(this).attr("data-content","密码不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -160,8 +164,8 @@
 				}
 			})
 			$("#phone").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var phone = $(this).val();
+				if(phone==""){
 					$(this).attr("data-content","手机不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -171,8 +175,8 @@
 				}
 			})
 			$("#password2").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var password2 = $(this).val();
+				if(password2==""){
 					$(this).attr("data-content","重复密码不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -182,8 +186,8 @@
 				}
 			})
 			$("#address").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var user_address = $(this).val();
+				if(user_address==""){
 					$(this).attr("data-content","详细地址不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -193,8 +197,8 @@
 				}
 			})
 			$("#answer").blur(function () {
-				var val = $(this).val();
-				if(val==""){
+				var question_answer = $(this).val();
+				if(question_answer==""){
 					$(this).attr("data-content","答案不能为空");
 					$(this).popover("show");
 					//isValidateUsername = false;
@@ -203,6 +207,63 @@
 					//isValidateUsername = true;
 				}
 			})
+			$("#authCode").blur(function () {
+				var authCode = $(this).val();
+				if(authCode==""){
+					$(this).attr("data-content","验证码不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+
+			var user_email = $("#email").val();
+			var user_name = $("#username").val();
+			var user_pwd = $("#password").val();
+			var phone = $("#phone").val();
+			var password2 = $("#password2").val();
+			var user_address = $("#address").val();
+			var question_answer = $("#answer").val();
+
+			var province_id = $("#province option:selected").val();
+			var city_id = $("#city option:selected").val();
+			var area_id = $("#area option:selected").val();
+
+			var question_id = $("#qustion option:selected").val();
+			var user_sex = $("[name = 'sex']").val();
+
+			var url = "${pageContext.request.contextPath}/user/newRegister.action";
+			var data = {
+				user_email: user_email,
+				user_name: user_name,
+				user_pwd: user_pwd,
+				user_head: "",
+				phone: phone,
+				user_sex: user_sex,
+				password2: password2,
+				province_id: province_id,
+				city_id: city_id,
+				area_id: area_id,
+				user_address: user_address,
+				question_id: question_id,
+				question_answer: question_answer,
+				is_activated: "",
+				is_online: "",
+				time: "",
+				authCode: ""
+			}
+
+			$.post(url,data,function (result) {
+				if(result.flag){
+
+				}else{
+					alert("注册失败")
+				}
+			},"json")
+
+
 		}
 
 
