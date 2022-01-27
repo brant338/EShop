@@ -2,6 +2,7 @@ package com.wangshidai.eshopFront.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
 import com.wangshidai.eshopFront.entity.PwdQuestion;
 import com.wangshidai.eshopFront.entity.ResultBean;
@@ -169,8 +170,11 @@ public class UserController {
                             @YockMvcAnnotation.RequestParam(name = "is_online") String is_online,
                             @YockMvcAnnotation.RequestParam(name = "time") String time,
                             @YockMvcAnnotation.RequestParam(name = "authCode") String authCode){
+        //进行md5撒盐加密两次
+        String salt = "!@#"+user_pwd+"$";
+        user_pwd =SecureUtil.md5(SecureUtil.md5(salt));
 
-
+        int a = userService.Register(user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer);
 
     }
 

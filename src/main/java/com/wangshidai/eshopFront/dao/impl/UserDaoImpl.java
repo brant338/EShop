@@ -21,4 +21,9 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from tb_question";
         return MyJdbcUtilsV5.acquareFileldToBean(PwdQuestion.class,sql);
     }
+
+    @Override
+    public int Register(String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer) {
+        return 0;
+    }
 }

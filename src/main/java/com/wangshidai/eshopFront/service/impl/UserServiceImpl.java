@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
     public List<PwdQuestion> findPwdQuestion() {
         return userDao.findPwdQuestion();
     }
+
+    @Override
+    public int Register(String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer) {
+        return userDao.Register(user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer);
+    }
 }
