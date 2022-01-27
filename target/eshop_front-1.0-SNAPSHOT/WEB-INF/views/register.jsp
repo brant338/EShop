@@ -240,7 +240,7 @@
 				user_name: user_name,
 				user_pwd: user_pwd,
 				user_head: "",
-				phone: phone,
+				user_phone: phone,
 				user_sex: user_sex,
 				password2: password2,
 				province_id: province_id,

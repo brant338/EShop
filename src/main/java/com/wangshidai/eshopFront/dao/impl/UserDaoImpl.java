@@ -23,7 +23,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int Register(String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer) {
-        return 0;
+    public int Register(String user_name, String user_email, String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer, String user_phone) {
+        String sql = "insert into \n" +
+                " tb_user(user_name,user_pwd,user_head,user_email,user_sex,user_phone,user_address,question_id,question_answer,province_id,city_id,area_id,time)\n" +
+                " values(?,?,?,?,?,?,?,?,?,?,?,?,now())";
+        return MyJdbcUtilsV5.acquireSqlPrimaryKey(sql,
+                user_name,
+                user_pwd,
+                user_head,
+                user_email,
+                user_sex,
+                user_phone,
+                user_address,
+                question_id,
+                question_answer,
+                province_id,
+                city_id,
+                area_id);
     }
 }

@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int Register(String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer) {
-        return userDao.Register(user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer);
+    public int Register(String user_name, String user_email, String user_pwd, String user_head, String user_sex, String province_id, String city_id, String area_id, String user_address, String question_id, String question_answer, String user_phone) {
+        return userDao.Register(user_name,user_email,user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer,user_phone);
     }
 }

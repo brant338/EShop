@@ -111,8 +111,8 @@ public class MyJdbcUtilsV5 {
     /**
      * 
      * 创建sql语句对象,执行增删改（DML）
-     * 多条DML语句(包含事务操作)
-     * 
+     * 事务操作
+     * 查询自增长Id
      * @param a
      * @param params
      * @return
@@ -149,6 +149,41 @@ public class MyJdbcUtilsV5 {
     	return rows;
     }
 
+    public static int acquireSqlPrimaryKey(String a,Object... params){
+        int insertId = 0;
+        acquireConnection();
+        try {
+            logger.debug("SQL>>>>>>>>"+a);
+            connection.setAutoCommit(false);
+
+                preparedStatement = connection.prepareStatement(a);
+                for (int j = 0; j < params.length; j++) {
+                    if(params[j] !=null){
+                        logger.debug("参数列表:>>>>>>>>"+params[j]+"\t");
+                        preparedStatement.setObject(j+1,params[j]);
+                    }
+                }
+                //int num = 10/0;
+                preparedStatement.executeUpdate();
+                //查询自增长ID
+                String sqlSelect = "select LAST_INSERT_ID()";
+                resultSet = preparedStatement.executeQuery(sqlSelect);
+                resultSet.next();
+                insertId = resultSet.getInt(1);
+            connection.commit();
+
+        } catch (Exception e) {
+            logger.error("-1",e);
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                //logger.error("-1",e1);
+            }
+        }finally{
+            close();
+        }
+        return insertId;
+    }
     /**
      * 通过外部连接,创建sql语句对象,执行增删改（DML）
      *

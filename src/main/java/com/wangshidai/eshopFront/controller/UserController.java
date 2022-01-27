@@ -169,13 +169,15 @@ public class UserController {
                             @YockMvcAnnotation.RequestParam(name = "is_activated") String is_activated,
                             @YockMvcAnnotation.RequestParam(name = "is_online") String is_online,
                             @YockMvcAnnotation.RequestParam(name = "time") String time,
+                            @YockMvcAnnotation.RequestParam(name = "user_phone") String user_phone,
                             @YockMvcAnnotation.RequestParam(name = "authCode") String authCode){
         //进行md5撒盐加密两次
         String salt = "!@#"+user_pwd+"$";
         user_pwd =SecureUtil.md5(SecureUtil.md5(salt));
 
-        int a = userService.Register(user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer);
-
+        int uid =
+                userService.Register(user_name,user_email,user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer,user_phone);
+        System.out.println(uid);
     }
 
     @YockMvcAnnotation.RequestMapping("/pwdQuestion.action")
