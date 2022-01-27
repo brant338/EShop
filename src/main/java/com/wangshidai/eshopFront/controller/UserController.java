@@ -79,6 +79,10 @@ public class UserController {
         try {
             Map returnMap = new HashMap();
 
+            //进行md5撒盐加密两次
+            String salt = "!@#"+pwd+"$";
+            pwd = SecureUtil.md5(SecureUtil.md5(salt));
+
             //封装数据
             UserInfo userInfo = new UserInfo();
             userInfo.setUser_name(username);
@@ -177,6 +181,7 @@ public class UserController {
 
         int uid =
                 userService.Register(user_name,user_email,user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer,user_phone);
+
         System.out.println(uid);
     }
 
