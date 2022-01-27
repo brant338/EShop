@@ -23,6 +23,7 @@
 		<action name="userController" path="/user/logOut.action" />
 		<action name="userController" path="/user/member.action" />
 		<action name="userController" path="/user/register.action" />
+		<action name="userController" path="/user/pwdQuestion.action" />
 
 <!--		收货地址-->
 		<action name="addressController" path="/address/province.action" />

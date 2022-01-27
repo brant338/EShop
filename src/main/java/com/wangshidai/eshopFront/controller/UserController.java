@@ -3,6 +3,7 @@ package com.wangshidai.eshopFront.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import com.alibaba.fastjson.JSON;
+import com.wangshidai.eshopFront.entity.PwdQuestion;
 import com.wangshidai.eshopFront.entity.ResultBean;
 import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @YockMvcAnnotation.Controller("/user")
@@ -73,11 +75,6 @@ public class UserController {
                       @YockMvcAnnotation.RequestParam(name = "username") String username,
                       @YockMvcAnnotation.RequestParam(name = "pwd") String pwd){
         try {
-            //过滤编码格式ֵ
-            request.setCharacterEncoding("utf-8");
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html; charset=UTF-8");
-
             Map returnMap = new HashMap();
 
             //封装数据
@@ -147,8 +144,26 @@ public class UserController {
     public ModelAndView register(HttpServletRequest request,
                          HttpServletResponse response){
 
+
+
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
 
     }
+
+    @YockMvcAnnotation.RequestMapping("/pwdQuestion.action")
+    @YockMvcAnnotation.ResponseVoid
+    public void findPwdQuestion(HttpServletRequest request,
+                                HttpServletResponse response){
+        List<PwdQuestion> pwdQuestions =  userService.findPwdQuestion();
+
+        try {
+
+            response.getWriter().write(JSON.toJSONString(new ResultBean(true,pwdQuestions)));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

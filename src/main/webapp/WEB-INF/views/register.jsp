@@ -125,6 +125,85 @@
     		$("#vCode").attr("src","${pageContext.request.contextPath }/verifyCodeServlet?uuid="+new Date().getTime());
     	}
 
+    	function sublogin(){
+			$("#email").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","邮箱不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#username").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","用户名不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#password").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","密码不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#phone").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","手机不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#password2").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","重复密码不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#address").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","详细地址不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+			$("#answer").blur(function () {
+				var val = $(this).val();
+				if(val==""){
+					$(this).attr("data-content","答案不能为空");
+					$(this).popover("show");
+					//isValidateUsername = false;
+				}else{
+					$(this).popover("destroy");
+					//isValidateUsername = true;
+				}
+			})
+		}
 
 
     	//回车事件
@@ -150,6 +229,22 @@
 									$("<option value=\""+element.provinceid+"\">"+element.province+"</option>")
 								)
 							})
+					//查询密保问题
+					  url = "${pageContext.request.contextPath}/user/pwdQuestion.action"
+					  data = {}
+					  $.post(url,data,function (response1) {
+						  if(response1.flag){
+							var pwdQuestions = response1.data;
+							  $.each(pwdQuestions,function (index,element) {
+								  $("#qustion").append(
+										  $("<option value=\""+element.question_id+"\">"+element.question_title+"</option>")
+								  )
+							  })
+						  }else{
+						  	alert("密保问题查询失败")
+						  }
+					  },"json")
+
 
 				}else{
 					alert("省份查询失败")
