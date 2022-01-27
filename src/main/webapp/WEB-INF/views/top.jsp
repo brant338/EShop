@@ -51,7 +51,7 @@
             <li class="tg-line icon"></li>
 
             <c:if test="${ empty sessionScope.user.user_name}">
-                <li class="no-hover nologin"><span><a href="reg.html">注册</a></span></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/register.action">注册</a></span></li>
                 <li class="tg-line icon"></li>
                 <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">亲，请先登录！</a></span></li>
             </c:if>

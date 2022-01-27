@@ -29,6 +29,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         return  modelAndView;
     }
+
     @YockMvcAnnotation.RequestMapping("/captcha.action")
     public void captchaGenerator(HttpServletRequest request,
                                  HttpServletResponse response){
@@ -51,10 +52,7 @@ public class UserController {
                                HttpServletResponse response,
                                @YockMvcAnnotation.RequestParam(name = "authCode") String authCode){
         try {
-            //过滤编码格式ֵ
-            request.setCharacterEncoding("utf-8");
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html; charset=UTF-8");
+
             //取出验证码
             ShearCaptcha captcha = (ShearCaptcha)request.getSession().getAttribute("captcha");
             if(captcha.verify(authCode)){
@@ -138,6 +136,16 @@ public class UserController {
     @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/member_set.jsp")
     public ModelAndView memberPage(HttpServletRequest request,
                                    HttpServletResponse response){
+
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+
+    }
+
+    @YockMvcAnnotation.RequestMapping("/register.action")
+    @YockMvcAnnotation.ResponseDispatch("/WEB-INF/views/register.jsp")
+    public ModelAndView register(HttpServletRequest request,
+                         HttpServletResponse response){
 
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;

@@ -17,6 +17,11 @@ public class FilterLogin implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        //过滤编码格式ֵ
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         //获取请求的URI(请求地址)
         String uri = request.getRequestURI();
         if("/eshop_front/user/member.action".equals(uri) ||

@@ -6,6 +6,7 @@
 	<controller-class>
 		<controller name="goodsController" className="com.wangshidai.eshopFront.controller.GoodsController" />
 		<controller name="userController" className="com.wangshidai.eshopFront.controller.UserController" />
+		<controller name="addressController" className="com.wangshidai.eshopFront.controller.AddressController" />
 	</controller-class>
 	
 	
@@ -21,6 +22,13 @@
 		<action name="userController" path="/user/login.action" />
 		<action name="userController" path="/user/logOut.action" />
 		<action name="userController" path="/user/member.action" />
+		<action name="userController" path="/user/register.action" />
+
+<!--		收货地址-->
+		<action name="addressController" path="/address/province.action" />
+		<action name="addressController" path="/address/city.action" />
+		<action name="addressController" path="/address/area.action" />
+
 	</controller-mappings>
 		
 		
