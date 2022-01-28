@@ -122,147 +122,176 @@
         });
         
         function changeCode(){
-    		$("#vCode").attr("src","${pageContext.request.contextPath }/verifyCodeServlet?uuid="+new Date().getTime());
+    		$("#vCode").attr("src","${pageContext.request.contextPath }/user/captcha.action?uuid="+new Date().getTime());
     	}
 
+        var isValidateUserEmail = false;
+        var isValidateUsername = false;
+        var isValidatePassword = false;
+        var isValidatePhone = false;
+        var isValidatePassword2 = false;
+        var isValidateAddress = false;
+        var isValidateAnswer = false;
+        var isValidateAuthCode = false;
+
+        $("#email").blur(function () {
+            var user_email = $(this).val();
+            if(user_email==""){
+                $(this).attr("data-content","邮箱不能为空");
+                $(this).popover("show");
+                isValidateUserEmail = false;
+            }else{
+                $(this).popover("destroy");
+                isValidateUserEmail = true;
+            }
+        })
+        $("#username").blur(function () {
+            var user_name = $(this).val();
+            if(user_name==""){
+                $(this).attr("data-content","用户名不能为空");
+                $(this).popover("show");
+                isValidateUsername = false;
+            }else{
+                $(this).popover("destroy");
+                isValidateUsername = true;
+            }
+        })
+        $("#password").blur(function () {
+            var user_pwd  = $(this).val();
+            if(user_pwd==""){
+                $(this).attr("data-content","密码不能为空");
+                $(this).popover("show");
+                isValidatePassword = false;
+            }else{
+                $(this).popover("destroy");
+                isValidatePassword = true;
+            }
+        })
+        $("#phone").blur(function () {
+            var phone = $(this).val();
+            if(phone==""){
+                $(this).attr("data-content","手机不能为空");
+                $(this).popover("show");
+                isValidatePhone = false;
+            }else{
+                $(this).popover("destroy");
+                isValidatePhone = true;
+            }
+        })
+        $("#password2").blur(function () {
+            var password2 = $(this).val();
+            if(password2==""){
+                $(this).attr("data-content","重复密码不能为空");
+                $(this).popover("show");
+                isValidatePassword2 = false;
+            }else{
+                $(this).popover("destroy");
+                isValidatePassword2 = true;
+                if(password2 !== $("#password").val()){
+                    $(this).attr("data-content","重复密码与设置密码必须一样");
+                    $(this).popover("show");
+                    isValidatePassword2 = false;
+                }else{
+                    $(this).popover("destroy");
+                    isValidatePassword2 = true;
+                }
+            }
+        })
+        $("#address").blur(function () {
+            var user_address = $(this).val();
+            if(user_address==""){
+                $(this).attr("data-content","详细地址不能为空");
+                $(this).popover("show");
+                isValidateAddress = false;
+            }else{
+                $(this).popover("destroy");
+                isValidateAddress = true;
+            }
+        })
+        $("#answer").blur(function () {
+            var question_answer = $(this).val();
+            if(question_answer==""){
+                $(this).attr("data-content","答案不能为空");
+                $(this).popover("show");
+                isValidateAnswer = false;
+            }else{
+                $(this).popover("destroy");
+                isValidateAnswer = true;
+            }
+        })
+        $("#authCode").blur(function () {
+            var authCode1 = $(this).val();
+            if(authCode1==""){
+                $(this).attr("data-content","验证码不能为空");
+                $(this).popover("show");
+                isValidateAuthCode = false;
+            }else{
+                $(this).popover("destroy");
+                isValidateAuthCode = true;
+            }
+        })
+
     	function sublogin(){
+            if(isValidateUserEmail && isValidateUsername && isValidatePassword && isValidatePhone
+                && isValidatePassword2 && isValidateAddress && isValidateAnswer && isValidateAuthCode){
+                var user_email = $("#email").val();
+                var user_name = $("#username").val();
+                var user_pwd = $("#password").val();
+                var phone = $("#phone").val();
+                var password2 = $("#password2").val();
+                var user_address = $("#address").val();
+                var question_answer = $("#answer").val();
 
+                var province_id = $("#province option:selected").val();
+                var city_id = $("#city option:selected").val();
+                var area_id = $("#area option:selected").val();
 
+                var question_id = $("#qustion option:selected").val();
+                var user_sex = $("[name = 'sex']").val();
+                var authCode = $("#authCode").val();
 
+                var url = "${pageContext.request.contextPath}/user/check_captcha.action";
+                var data = {
+                    authCode: authCode
+                }
+                //验证码
+                $.post(url,data,function (response) {
+                    if(response.flag){
+                        //注册用户
+                        var url1 = "${pageContext.request.contextPath}/user/newRegister.action";
+                        var data1 = {
+                            user_email: user_email,
+                            user_name: user_name,
+                            user_pwd: user_pwd,
+                            user_head: "",
+                            user_phone: phone,
+                            user_sex: user_sex,
+                            password2: password2,
+                            province_id: province_id,
+                            city_id: city_id,
+                            area_id: area_id,
+                            user_address: user_address,
+                            question_id: question_id,
+                            question_answer: question_answer,
+                            is_activated: "",
+                            is_online: "",
+                            time: "",
+                            authCode: ""
+                        }
+                        $.post(url1,data1,function (result) {
+                            if(result.flag){
 
-			$("#email").blur(function () {
-				var user_email = $(this).val();
-				if(user_email==""){
-					$(this).attr("data-content","邮箱不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#username").blur(function () {
-				var user_name = $(this).val();
-				if(user_name==""){
-					$(this).attr("data-content","用户名不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#password").blur(function () {
-				var user_pwd  = $(this).val();
-				if(user_pwd==""){
-					$(this).attr("data-content","密码不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#phone").blur(function () {
-				var phone = $(this).val();
-				if(phone==""){
-					$(this).attr("data-content","手机不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#password2").blur(function () {
-				var password2 = $(this).val();
-				if(password2==""){
-					$(this).attr("data-content","重复密码不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#address").blur(function () {
-				var user_address = $(this).val();
-				if(user_address==""){
-					$(this).attr("data-content","详细地址不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#answer").blur(function () {
-				var question_answer = $(this).val();
-				if(question_answer==""){
-					$(this).attr("data-content","答案不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
-			$("#authCode").blur(function () {
-				var authCode = $(this).val();
-				if(authCode==""){
-					$(this).attr("data-content","验证码不能为空");
-					$(this).popover("show");
-					//isValidateUsername = false;
-				}else{
-					$(this).popover("destroy");
-					//isValidateUsername = true;
-				}
-			})
+                            }else{
+                                alert("注册失败")
+                            }
+                        },"json")
 
-			var user_email = $("#email").val();
-			var user_name = $("#username").val();
-			var user_pwd = $("#password").val();
-			var phone = $("#phone").val();
-			var password2 = $("#password2").val();
-			var user_address = $("#address").val();
-			var question_answer = $("#answer").val();
-
-			var province_id = $("#province option:selected").val();
-			var city_id = $("#city option:selected").val();
-			var area_id = $("#area option:selected").val();
-
-			var question_id = $("#qustion option:selected").val();
-			var user_sex = $("[name = 'sex']").val();
-
-			var url = "${pageContext.request.contextPath}/user/newRegister.action";
-			var data = {
-				user_email: user_email,
-				user_name: user_name,
-				user_pwd: user_pwd,
-				user_head: "",
-				user_phone: phone,
-				user_sex: user_sex,
-				password2: password2,
-				province_id: province_id,
-				city_id: city_id,
-				area_id: area_id,
-				user_address: user_address,
-				question_id: question_id,
-				question_answer: question_answer,
-				is_activated: "",
-				is_online: "",
-				time: "",
-				authCode: ""
-			}
-
-			$.post(url,data,function (result) {
-				if(result.flag){
-
-				}else{
-					alert("注册失败")
-				}
-			},"json")
-
+                    }else{
+                        alert("验证码错误")
+                        changeCode()
+                    }
+                },"json")
+            }
 
 		}
 

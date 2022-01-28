@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateActivated(int uuid) {
-        String sql = "update tb_user set is_activated = 1 where id = ?";
+        String sql = "update tb_user set is_activated = 1 where user_id = ?";
         MyJdbcUtilsV5.acquireSql(sql,uuid);
     }
 
