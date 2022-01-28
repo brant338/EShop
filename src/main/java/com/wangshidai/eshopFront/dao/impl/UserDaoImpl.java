@@ -41,4 +41,18 @@ public class UserDaoImpl implements UserDao {
                 city_id,
                 area_id);
     }
+
+    @Override
+    public void updateActivated(int uuid) {
+        String sql = "update tb_user set is_activated = 1 where id = ?";
+        MyJdbcUtilsV5.acquireSql(sql,uuid);
+    }
+
+    @Override
+    public UserInfo selectUserById(UserInfo userInfo) {
+
+        String sql = "select * from tb_user where user_id = ?" ;
+
+        return MyJdbcUtilsV5.acquareFileldToBeanOneLine(UserInfo.class,sql,userInfo.getUser_id());
+    }
 }

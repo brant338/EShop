@@ -10,6 +10,7 @@ import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
 import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
 import com.wangshidai.eshopFront.utils.JsonUtils;
+import com.wangshidai.eshopFront.utils.MailUtilByYock;
 import org.lanqiao.mvc.entity.ModelAndView;
 import org.lanqiao.mvc.entity.YockMvcAnnotation;
 
@@ -181,8 +182,34 @@ public class UserController {
 
         int uid =
                 userService.Register(user_name,user_email,user_pwd,user_head,user_sex,province_id,city_id,area_id,user_address,question_id,question_answer,user_phone);
-
+        String verifyUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/eshop_front/user/verify_activated_account.action?uuid="+uid;
+        String content = "亲爱的"+user_name+",您好<br/>"
+                + "已经收到了您的注册信息.请点击以下确认链接,立即激活Eshop账号: <br/>"
+                +"<a href=\""+verifyUrl+"\"><h3>完成注册,立即体验娱乐之旅</h3></a>"
+                +"如果不能点击该链接地址,请复制并粘贴到浏览器的地址输入框<br />"+ verifyUrl;
+        boolean result = MailUtilByYock.sendMail(user_email,user_name,"请完成EShop用户注册",content);
         System.out.println(uid);
+    }
+
+    @YockMvcAnnotation.RequestMapping("/verify_activated_account.action")
+    @YockMvcAnnotation.ResponseVoid
+    public void verifyActivatedAccount(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @YockMvcAnnotation.RequestParam(name = "uuid") int uuid
+    ) throws Exception {
+
+        //激活状态
+        userService.updateActivated(uuid);
+
+        //通过ID查询出用户信息，并保存在session
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUser_id(uuid);
+        UserInfo loginUser = userService.selectUserById(userInfo);
+        request.getSession().setAttribute("user",loginUser);
+
+        //跳转到首页地址
+        response.sendRedirect("/eshop_front");
     }
 
     @YockMvcAnnotation.RequestMapping("/pwdQuestion.action")
