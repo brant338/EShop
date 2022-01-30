@@ -20,7 +20,7 @@
 <%--顶部--%>
 <%--<%@include file="/WEB-INF/views/top.jsp"%>--%>
 <%--<jsp:include page="${'/type/list.action'}"></jsp:include>--%>
-<c:import url="/top" />
+<c:import url="/top/topMenu" />
 
 
 <div class="container">

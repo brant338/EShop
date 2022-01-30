@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+根标签mapper，一个映射配置文件，就对应一个dao接口
+根标签的namespace属性的值就对应dao接口的全限定名
+-->
+<mapper namespace="com.wangshidai.eshopFront.dao.RegDao">
+
+    <select id="findPwdQuestion" resultType="PwdQuestion">
+        select * from tb_question
+    </select>
+
+    <update id="updateActivated" parameterType="int">
+        update tb_user set is_activated = 1 where user_id = #{uuid}
+    </update>
+
+    <select id="selectUserById" parameterType="UserInfo" resultType="UserInfo">
+        select * from tb_user where user_id = #{user_id}
+    </select>
+
+    <select id="register" parameterType="UserInfo" resultType="int">
+        insert into
+        tb_user(user_name,user_pwd,user_head,user_email,
+                user_sex,user_phone,user_address,question_id,
+                question_answer,province_id,city_id,area_id,time)
+        values(#{user_name},#{user_pwd},#{user_head},#{user_email},
+               #{user_sex},#{user_phone},#{user_address},#{question_id},
+               #{question_answer},#{province_id},#{city_id},#{area_id},now())
+    </select>
+
+</mapper>

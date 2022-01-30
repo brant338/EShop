@@ -204,7 +204,7 @@
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/style.css" type="text/css" />
 
-    <c:import url="/top?goodDetailMenu=1" />
+    <c:import url="/top/topMenu?goodDetailMenu=1" />
 
     <div class="goods-infor clearfix">
         <div class="goods-img">

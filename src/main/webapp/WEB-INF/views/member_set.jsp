@@ -13,7 +13,7 @@
     </head> 
     <body> 
         
-<c:import url="/top?goodDetailMenu=1" />
+<c:import url="/top/topMenu?goodDetailMenu=1" />
 		
 <div class="container clearfix">
     

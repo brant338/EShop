@@ -2,10 +2,15 @@ package com.wangshidai.eshopFront.dao;
 
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
 import com.wangshidai.eshopFront.pojo.GoodsInfo;
-import com.wangshidai.eshopFront.pojo.PageInfo;
+
 import com.wangshidai.eshopFront.pojo.TypeInfo;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
+import java.util.Map;
+
+
 
 public interface GoodsDao {
     /**
@@ -17,34 +22,20 @@ public interface GoodsDao {
     List<TypeInfo> findGoodType(String rootTypeId);
 
     /**
-     * 查询 未添加搜索
-     *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @return
-     */
-    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId);
-
-    /**
      * 分页查询
      *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @param keyword
-     * @param pageInfo
+     * @param map
      * @return
      */
-    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo);
+    List<GoodsInfo> findGood(Map map);
 
     /**
      * 查询商品总个数
      *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @param keyword
+     * @param map
      * @return
      */
-    int findGoodCount(String rootTypeId, String oneLevelTypeId, String keyword);
+    int findGoodCount(Map map);
 
     /**
      * 查询单个商品
@@ -52,7 +43,7 @@ public interface GoodsDao {
      * @param book_id
      * @return
      */
-    GoodsInfo findGood(int book_id);
+    GoodsInfo findGoodOne(int book_id);
 
     /**
      * 查询商品图片(小图)

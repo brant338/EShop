@@ -19,7 +19,7 @@
                 <a id="msg_notify" class="msg_notify" href="member_message.html"></a>
             </li>
             <li class='box_color nav_home'>
-                <span><a href="${pageContext.request.contextPath}/user/member.action"><span>我的账户</span></a></span><b class="icon"></b>
+                <span><a href="${pageContext.request.contextPath}/user/member"><span>我的账户</span></a></span><b class="icon"></b>
                 <ul>
                     <li>
                         <a href="history.html"><span>浏览记录</span></a>
@@ -29,7 +29,7 @@
                         <a href="cart.html"><span>购物车(10)</span></a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/user/logOut.action"><span>退出登录</span></a>
+                        <a href="${pageContext.request.contextPath}/user/logOut"><span>退出登录</span></a>
                     </li>
                 </ul>
             </li>
@@ -51,14 +51,14 @@
             <li class="tg-line icon"></li>
 
             <c:if test="${ empty sessionScope.user.user_name}">
-                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/register.action">注册</a></span></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/register">注册</a></span></li>
                 <li class="tg-line icon"></li>
-                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">亲，请先登录！</a></span></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin">亲，请先登录！</a></span></li>
             </c:if>
             <c:if test="${ !empty sessionScope.user.user_name }">
                 <li class="no-hover nologin"><span><a href="reg.html">欢迎您</a></span></li>
                 <li class="tg-line icon"></li>
-                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin.action">${sessionScope.user.user_name }</a></span></li>
+                <li class="no-hover nologin"><span><a href="${pageContext.request.contextPath}/user/showLogin">${sessionScope.user.user_name }</a></span></li>
             </c:if>
 
            </ul>
@@ -69,7 +69,7 @@
         <div class="logo">
             <a class="logo-bd" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/public/css/images/logo.png" alt="Eshop" width="75px" height="70px" /></a>
         </div>
-        <form action="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}" method="post" id="form_search">
+        <form action="${pageContext.request.contextPath}/product/type?type_id=${type_id}&child_type_id=${child_type_id}" method="post" id="form_search">
             <div id='search'>
                 <div class="search_area">
                     <input type='submit' value='搜 索' class='btn_search' />
@@ -98,7 +98,7 @@
         <div class='nav_main clearfix' id="topMenu">
             <a href="${pageContext.request.contextPath}/" class="menu ${type_id == 0 ? 'current' : ''}">首 页</a>
             <c:forEach items="${rootType}" var="type" >
-                <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}"
+                <a href="${pageContext.request.contextPath}/product/type?type_id=${type.type_id}"
                    class="menu ${type_id == type.type_id ? 'current' : ''} "> ${type.type_name}
                 </a>
             </c:forEach>

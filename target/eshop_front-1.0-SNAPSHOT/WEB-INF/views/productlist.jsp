@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<c:import url="/top" />
+<c:import url="/top/topMenu" />
 <!--商品展示区-->
 <c:if test="${not empty type_id}">
     <div id="classify" class="tg_classify">
@@ -38,7 +38,7 @@
                 <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
                     <c:forEach items="${rootType}" var="type">
                         <dd class="${type.type_id == type_id ? 'on' : ''}">
-                            <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type.type_id}">
+                            <a href="${pageContext.request.contextPath}/product/type?type_id=${type.type_id}">
                                 <span>${type.type_name}</span>
                             </a>
                         </dd>
@@ -54,11 +54,11 @@
                 </dl>
                 <dl class="tg_classify_all tg_classify_flat clearfix dl_right">
                     <dd class="${empty child_type_id ? 'on' : '' }">
-                        <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}"><span>不限</span></a>
+                        <a href="${pageContext.request.contextPath}/product/type?type_id=${type_id}"><span>不限</span></a>
                     </dd>
                     <c:forEach items="${oneLevelGoods}" var="oneLevelGood" varStatus="i">
                         <dd  class="${oneLevelGood.type_id == child_type_id ? 'on' : '' }">
-                            <a href="${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
+                            <a href="${pageContext.request.contextPath}/product/type?type_id=${type_id}&child_type_id=${oneLevelGood.type_id}">
                                 <span>${oneLevelGood.type_name}</span>
                             </a>
                         </dd>
@@ -118,7 +118,7 @@
         </div>
 
         <c:set var="pageUrl">
-            ${pageContext.request.contextPath}/product/type.action?type_id=${type_id}&child_type_id=${child_type_id}&keyword=${keyword}
+            ${pageContext.request.contextPath}/product/type?type_id=${type_id}&child_type_id=${child_type_id}&keyword=${keyword}
         </c:set>
 
         <div id="order-page" class="order-page">
@@ -164,7 +164,7 @@
                     </c:if>
                 </c:set>
                 <div class="per" ${isRight}>
-                    <a target="_blank" href="${pageContext.request.contextPath}/product/good.action?book_id=${goodInfo.book_id}" class="img_link">
+                    <a target="_blank" href="${pageContext.request.contextPath}/product/good?book_id=${goodInfo.book_id}" class="img_link">
                         <img src="${pageContext.request.contextPath}/upload/${goodInfo.book_logo_small}" original="#" alt="#" class="lazy">
                     </a>
                     <div class="foot">

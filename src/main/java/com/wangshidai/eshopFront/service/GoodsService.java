@@ -2,10 +2,13 @@ package com.wangshidai.eshopFront.service;
 
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
 import com.wangshidai.eshopFront.pojo.GoodsInfo;
-import com.wangshidai.eshopFront.pojo.PageInfo;
+
 import com.wangshidai.eshopFront.pojo.TypeInfo;
 
+
 import java.util.List;
+import java.util.Map;
+
 
 public interface GoodsService {
     /**
@@ -16,42 +19,29 @@ public interface GoodsService {
      */
     List<TypeInfo> findGoodType(String rootTypeId);
 
-    /**
-     * 查询一级分类商品信息
-     *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @return
-     */
-    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId);
 
     /**
      * 分页查询
      *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @param keyword
-     * @param pageInfo
+     * @param map
      * @return
      */
-    List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo);
+    List<GoodsInfo> findGood(Map map);
 
     /**
      * 根据搜索框查询商品信息
      *
-     * @param rootTypeId
-     * @param oneLevelTypeId
-     * @param keyword
+     * @param map
      * @return
      */
-    int findGoodCount(String rootTypeId, String oneLevelTypeId, String keyword);
+    int findGoodCount(Map map);
 
     /**
      * 查询单个商品
      * @param book_id
      * @return
      */
-    GoodsInfo findGood(int book_id);
+    GoodsInfo findGoodOne(int book_id);
 
     /**
      * 查询商品图片(小图)

@@ -44,7 +44,7 @@
                     	title="ⓘ提示"
             		  	data-container="body" data-toggle="popover" data-placement="right"
             			data-content="验证码错误" />
-                    <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha.action" id="vCode" width="180px" height="50px"  /></a>
+                    <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha" id="vCode" width="180px" height="50px"  /></a>
                     
                     <label><hr /></label>
                     <a href="javascript:;" class="btn btn-primary pull-right" id="submit1">登录</a>
@@ -73,7 +73,7 @@
         var isValidateCode = false;
 
         function changeCode(){
-    		$("#vCode").attr("src","${pageContext.request.contextPath }/user/captcha.action?uuid="+new Date().getTime());
+    		$("#vCode").attr("src","${pageContext.request.contextPath }/user/captcha?uuid="+new Date().getTime());
     	}
 
     	$("#username").blur(function () {
@@ -114,7 +114,7 @@
                     //解决ajax一次请求对此回调问题
                     $("#submit1").off().on("click",function(){
 
-                        var url = "${pageContext.request.contextPath}/user/login.action";
+                        var url = "${pageContext.request.contextPath}/user/login";
                         var username = $("#username").val();
                         var pwd = $("#pwd").val();
                         val = $("#authCode").val();

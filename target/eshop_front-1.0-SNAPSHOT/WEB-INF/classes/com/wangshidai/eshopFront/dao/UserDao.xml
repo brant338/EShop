@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+根标签mapper，一个映射配置文件，就对应一个dao接口
+根标签的namespace属性的值就对应dao接口的全限定名
+-->
+<mapper namespace="com.wangshidai.eshopFront.dao.UserDao">
+
+    <select id="findUser" parameterType="UserInfo" resultType="UserInfo">
+        select * from tb_user
+        where (user_name = #{user_name} or user_email = #{user_email}) and user_pwd = #{user_pwd}
+    </select>
+
+</mapper>

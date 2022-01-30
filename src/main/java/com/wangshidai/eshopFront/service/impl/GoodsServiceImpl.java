@@ -1,18 +1,22 @@
 package com.wangshidai.eshopFront.service.impl;
 
 import com.wangshidai.eshopFront.dao.GoodsDao;
-import com.wangshidai.eshopFront.dao.impl.GoodsDaoImpl;
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
 import com.wangshidai.eshopFront.pojo.GoodsInfo;
 import com.wangshidai.eshopFront.pojo.PageInfo;
 import com.wangshidai.eshopFront.pojo.TypeInfo;
 import com.wangshidai.eshopFront.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
+@Service
 public class GoodsServiceImpl implements GoodsService {
 
-    private GoodsDao goodsDao = new GoodsDaoImpl();
+    @Autowired
+    private GoodsDao goodsDao;
 
     @Override
     public List<TypeInfo> findGoodType(String rootTypeId) {
@@ -20,23 +24,21 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId) {
-        return goodsDao.findGood(rootTypeId, oneLevelTypeId);
+    public List<GoodsInfo> findGood(Map map) {
+        PageInfo pageInfo = (PageInfo)map.get("pageInfo");
+        map.put("startIndex",(pageInfo.getCurrentPage()-1)*pageInfo.getPageSize());
+        return goodsDao.findGood(map);
     }
 
     @Override
-    public List<GoodsInfo> findGood(String rootTypeId, String oneLevelTypeId, String keyword, PageInfo<GoodsInfo> pageInfo) {
-        return goodsDao.findGood(rootTypeId,oneLevelTypeId,keyword,pageInfo);
+    public int findGoodCount(Map map) {
+        return goodsDao.findGoodCount(map);
     }
 
     @Override
-    public int findGoodCount(String rootTypeId, String oneLevelTypeId, String keyword) {
-        return goodsDao.findGoodCount(rootTypeId,oneLevelTypeId,keyword);
-    }
+    public GoodsInfo findGoodOne(int book_id) {
 
-    @Override
-    public GoodsInfo findGood(int book_id) {
-        return goodsDao.findGood(book_id);
+        return goodsDao.findGoodOne(book_id);
     }
 
     @Override
