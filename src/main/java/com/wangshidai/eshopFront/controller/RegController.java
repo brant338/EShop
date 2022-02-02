@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wangshidai.eshopFront.entity.PwdQuestion;
 import com.wangshidai.eshopFront.entity.ResultBean;
 import com.wangshidai.eshopFront.pojo.UserInfo;
@@ -12,6 +13,7 @@ import com.wangshidai.eshopFront.utils.JsonUtils;
 import com.wangshidai.eshopFront.utils.MailUtilByYock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,27 +41,30 @@ public class RegController {
     }
     @RequestMapping("/newRegister")
     public void newRegister(HttpServletRequest request,
-                            HttpServletResponse response) throws IOException {
+                            HttpServletResponse response,
+                            @RequestBody UserInfo userInfo) throws IOException {
 
-        UserInfo userInfo = JsonUtils.parseJSON2Object(request, UserInfo.class);
+        //UserInfo userInfo = JsonUtils.parseJSON2Object(request, UserInfo.class);
 
         //进行md5撒盐加密两次
         String salt = "!@#"+userInfo.getUser_pwd()+"$";
         String user_pwd = SecureUtil.md5(SecureUtil.md5(salt));
         userInfo.setUser_pwd(user_pwd);
 
-        int uid =
-                regService.Register(userInfo);
-        String verifyUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/eshop_front/user/verify_activated_account.action?uuid="+uid;
+        int uid = regService.register(userInfo);
+        String verifyUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/eshop_front/register/verify_activated_account?uuid="+uid;
         String content = "亲爱的"+userInfo.getUser_name()+",您好<br/>"
                 + "已经收到了您的注册信息.请点击以下确认链接,立即激活Eshop账号: <br/>"
                 +"<a href=\""+verifyUrl+"\"><h3>完成注册,立即体验娱乐之旅</h3></a>"
                 +"如果不能点击该链接地址,请复制并粘贴到浏览器的地址输入框<br />"+ verifyUrl;
         boolean result = MailUtilByYock.sendMail(userInfo.getUser_email(),userInfo.getUser_name(),"请完成EShop用户注册",content);
-        System.out.println(uid);
+        //System.out.println(uid);
+        System.out.println(new ObjectMapper().writeValueAsString(new ResultBean(true,result)));
+        response.getWriter().write(new ObjectMapper().writeValueAsString(new ResultBean(true,result)));
+
     }
 
-    @RequestMapping("/verify_activated_account.action")
+    @RequestMapping("/verify_activated_account")
     public void verifyActivatedAccount(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -93,7 +98,7 @@ public class RegController {
         }
     }
 
-    @RequestMapping("/captcha.action")
+    @RequestMapping("/captcha")
     public void captchaGenerator(HttpServletRequest request,
                                  HttpServletResponse response){
         //生成验证码
@@ -109,7 +114,7 @@ public class RegController {
         }
 
     }
-    @RequestMapping("/check_captcha.action")
+    @RequestMapping("/check_captcha")
     public void checkCaptcha(HttpServletRequest request,
                              HttpServletResponse response,
                              @RequestParam("authCode") String authCode){

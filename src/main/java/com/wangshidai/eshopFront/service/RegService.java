@@ -13,7 +13,7 @@ public interface RegService {
 
     List<PwdQuestion> findPwdQuestion();
 
-    int Register(UserInfo userInfo);
+    int register(UserInfo userInfo);
 
     void updateActivated(int uuid);
 

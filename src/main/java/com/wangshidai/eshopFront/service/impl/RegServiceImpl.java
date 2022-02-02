@@ -22,8 +22,9 @@ public class RegServiceImpl implements RegService {
     }
 
     @Override
-    public int Register(UserInfo userInfo) {
-        return regDao.Register(userInfo);
+    public int register(UserInfo userInfo) {
+        int count = regDao.register(userInfo);
+        return userInfo.getUser_id() ;
     }
 
     @Override

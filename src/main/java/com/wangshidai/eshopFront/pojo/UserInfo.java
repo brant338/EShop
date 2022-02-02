@@ -9,7 +9,7 @@ public class UserInfo {
     private String user_head;  //头像
     private String user_email;  //邮箱
     private String user_sex;    //性别
-    private String phone;       //手机
+    private String user_phone;       //手机
     private String user_address; //详细地址(街道/门牌号)
     private Integer question_id;  //密保问题
     private String question_answer;  //密保答案
@@ -72,12 +72,12 @@ public class UserInfo {
         this.user_sex = user_sex;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUser_phone() {
+        return user_phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
     }
 
     public String getUser_address() {
@@ -185,7 +185,7 @@ public class UserInfo {
                 ", user_head='" + user_head + '\'' +
                 ", user_email='" + user_email + '\'' +
                 ", user_sex='" + user_sex + '\'' +
-                ", phone='" + phone + '\'' +
+                ", user_phone='" + user_phone + '\'' +
                 ", user_address='" + user_address + '\'' +
                 ", question_id=" + question_id +
                 ", question_answer='" + question_answer + '\'' +

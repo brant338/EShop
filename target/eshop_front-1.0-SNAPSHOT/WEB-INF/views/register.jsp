@@ -27,13 +27,13 @@
             <div class="block-body">
                 <form>
                     <label>会员邮箱</label>
-		            <input type="text" class="span12" id="email" name="email" v-model="user.user_name"
+		            <input type="text" class="span12" id="email" name="email" v-model="user.user_email"
 		              	title="ⓘ提示"
             		  	data-container="body" data-toggle="popover" data-placement="right"
             			data-content="邮箱不能为空"  />
             			
             		<label>用户名</label>
-		            <input type="text" class="span12" id="username" name="username" v-model="user.user_email"
+		            <input type="text" class="span12" id="username" name="username" v-model="user.user_name"
 		              	title="ⓘ提示"
             		  	data-container="body" data-toggle="popover" data-placement="right"
             			data-content="用户名不能为空" />
@@ -51,8 +51,8 @@
             			data-content="重复密码不能为空" />
             			
             		<label>性别</label>
-                                                  男 <input type="radio" class="span1" name="sex" value="男" checked="checked" v-model="user.sex" />&nbsp;&nbsp;&nbsp;&nbsp;
-                                                  女 <input type="radio" class="span1" name="sex" value="女" v-model="user.sex" />
+                                                  男 <input type="radio" class="span1" name="sex" value="男" checked="checked" v-model="user.user_sex" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                  女 <input type="radio" class="span1" name="sex" value="女" v-model="user.user_sex" />
                                                   
                     <label><hr /></label>
                     
@@ -102,7 +102,7 @@
                     <a href="javascript:changeCode()"><img src="${pageContext.request.contextPath }/user/captcha" id="vCode" width="180px" height="50px"  /></a>
                     
                     <label><hr /></label>
-                    <a href="javascript:sublogin();" class="btn btn-primary pull-right">注册</a>
+                    <a href="javascript:;" class="btn btn-primary pull-right" @click="registerNew()">注册</a>
                     
                     
                     <div class="clearfix"></div>
@@ -135,109 +135,6 @@
         var isValidateAddress = false;
         var isValidateAnswer = false;
         var isValidateAuthCode = false;
-
-        $("#email").blur(function () {
-            var user_email = $(this).val();
-            if(user_email==""){
-                $(this).attr("data-content","邮箱不能为空");
-                $(this).popover("show");
-                isValidateUserEmail = false;
-            }else{
-                $(this).popover("destroy");
-                isValidateUserEmail = true;
-            }
-        })
-        $("#username").blur(function () {
-            var user_name = $(this).val();
-            if(user_name==""){
-                $(this).attr("data-content","用户名不能为空");
-                $(this).popover("show");
-                isValidateUsername = false;
-            }else{
-                $(this).popover("destroy");
-                isValidateUsername = true;
-            }
-        })
-        $("#password").blur(function () {
-            var user_pwd  = $(this).val();
-            if(user_pwd==""){
-                $(this).attr("data-content","密码不能为空");
-                $(this).popover("show");
-                isValidatePassword = false;
-            }else{
-                $(this).popover("destroy");
-                isValidatePassword = true;
-            }
-        })
-        $("#phone").blur(function () {
-            var phone = $(this).val();
-            if(phone==""){
-                $(this).attr("data-content","手机不能为空");
-                $(this).popover("show");
-                isValidatePhone = false;
-            }else{
-                $(this).popover("destroy");
-                isValidatePhone = true;
-            }
-        })
-        $("#password2").blur(function () {
-            var password2 = $(this).val();
-            if(password2==""){
-                $(this).attr("data-content","重复密码不能为空");
-                $(this).popover("show");
-                isValidatePassword2 = false;
-            }else{
-                $(this).popover("destroy");
-                isValidatePassword2 = true;
-                if(password2 !== $("#password").val()){
-                    $(this).attr("data-content","重复密码与设置密码必须一样");
-                    $(this).popover("show");
-                    isValidatePassword2 = false;
-                }else{
-                    $(this).popover("destroy");
-                    isValidatePassword2 = true;
-                }
-            }
-        })
-        $("#address").blur(function () {
-            var user_address = $(this).val();
-            if(user_address==""){
-                $(this).attr("data-content","详细地址不能为空");
-                $(this).popover("show");
-                isValidateAddress = false;
-            }else{
-                $(this).popover("destroy");
-                isValidateAddress = true;
-            }
-        })
-        $("#answer").blur(function () {
-            var question_answer = $(this).val();
-            if(question_answer==""){
-                $(this).attr("data-content","答案不能为空");
-                $(this).popover("show");
-                isValidateAnswer = false;
-            }else{
-                $(this).popover("destroy");
-                isValidateAnswer = true;
-            }
-        })
-        $("#authCode").blur(function () {
-            var authCode1 = $(this).val();
-            if(authCode1==""){
-                $(this).attr("data-content","验证码不能为空");
-                $(this).popover("show");
-                isValidateAuthCode = false;
-            }else{
-                $(this).popover("destroy");
-                isValidateAuthCode = true;
-            }
-        })
-
-    	function sublogin(){
-
-            if(isValidateUserEmail && isValidateUsername && isValidatePassword && isValidatePhone
-                && isValidatePassword2 && isValidateAddress && isValidateAnswer && isValidateAuthCode){
-
             	var vue = new Vue({
 					el: '#app',
 					data: {
@@ -245,7 +142,7 @@
 							user_email: "",
 							user_name: "",
 							user_pwd: "",
-							user_head: "",
+							user_head: "1.jpg",
 							user_phone: "",
 							user_sex: "",
 							password2: "",
@@ -267,37 +164,137 @@
 					methods: {
 						registerNew(){
 
-
-							var url = "${pageContext.request.contextPath}/register/check_captcha";
-							var data = {
-								authCode: this.authCode
-							}
-							//验证码
-							$.post(url,data,function (response) {
-								if(response.flag){
-									//注册用户
-									var url1 = "${pageContext.request.contextPath}/register/newRegister";
-									var data1 = this.user
-									$.post(url1,data1,function (result) {
-										if(result.flag){
-											alert("注册成功,请前往邮箱验证")
-										}else{
-											alert("注册失败")
+								$("#email").blur(function () {
+									var user_email = $(this).val();
+									if (user_email == "") {
+										$(this).attr("data-content", "邮箱不能为空");
+										$(this).popover("show");
+										isValidateUserEmail = false;
+									} else {
+										$(this).popover("destroy");
+										isValidateUserEmail = true;
+									}
+								})
+								$("#username").blur(function () {
+									var user_name = $(this).val();
+									if (user_name == "") {
+										$(this).attr("data-content", "用户名不能为空");
+										$(this).popover("show");
+										isValidateUsername = false;
+									} else {
+										$(this).popover("destroy");
+										isValidateUsername = true;
+									}
+								})
+								$("#password").blur(function () {
+									var user_pwd = $(this).val();
+									if (user_pwd == "") {
+										$(this).attr("data-content", "密码不能为空");
+										$(this).popover("show");
+										isValidatePassword = false;
+									} else {
+										$(this).popover("destroy");
+										isValidatePassword = true;
+									}
+								})
+								$("#phone").blur(function () {
+									var phone = $(this).val();
+									if (phone == "") {
+										$(this).attr("data-content", "手机不能为空");
+										$(this).popover("show");
+										isValidatePhone = false;
+									} else {
+										$(this).popover("destroy");
+										isValidatePhone = true;
+									}
+								})
+								$("#password2").blur(function () {
+									var password2 = $(this).val();
+									if (password2 == "") {
+										$(this).attr("data-content", "重复密码不能为空");
+										$(this).popover("show");
+										isValidatePassword2 = false;
+									} else {
+										$(this).popover("destroy");
+										isValidatePassword2 = true;
+										if (password2 !== $("#password").val()) {
+											$(this).attr("data-content", "重复密码与设置密码必须一样");
+											$(this).popover("show");
+											isValidatePassword2 = false;
+										} else {
+											$(this).popover("destroy");
+											isValidatePassword2 = true;
 										}
-									},"json")
-
-								}else{
-									alert("验证码错误")
-									changeCode()
+									}
+								})
+								$("#address").blur(function () {
+									var user_address = $(this).val();
+									if (user_address == "") {
+										$(this).attr("data-content", "详细地址不能为空");
+										$(this).popover("show");
+										isValidateAddress = false;
+									} else {
+										$(this).popover("destroy");
+										isValidateAddress = true;
+									}
+								})
+								$("#answer").blur(function () {
+									var question_answer = $(this).val();
+									if (question_answer == "") {
+										$(this).attr("data-content", "答案不能为空");
+										$(this).popover("show");
+										isValidateAnswer = false;
+									} else {
+										$(this).popover("destroy");
+										isValidateAnswer = true;
+									}
+								})
+								$("#authCode").blur(function () {
+									var authCode1 = $(this).val();
+									if (authCode1 == "") {
+										$(this).attr("data-content", "验证码不能为空");
+										$(this).popover("show");
+										isValidateAuthCode = false;
+									} else {
+										$(this).popover("destroy");
+										isValidateAuthCode = true;
+									}
+								})
+							if (isValidateUserEmail && isValidateUsername && isValidatePassword && isValidatePhone
+									&& isValidatePassword2 && isValidateAddress && isValidateAnswer && isValidateAuthCode) {
+								var url = "${pageContext.request.contextPath}/register/check_captcha";
+								var data = {
+									authCode: this.authCode
 								}
-							},"json")
+								var url1 = "${pageContext.request.contextPath}/register/newRegister";
+								var userInfo = this.user
+								//验证码
+								$.post(url,data,function (response1) {
+									if(response1.flag){
+										axios.post(url1,userInfo).then(
+												response=>{
+													if(response.data.flag){
+														alert("注册成功,请前往邮箱验证")
+													}else{
+														alert("注册失败")
+													}
+													console.log(response.data)
+												}
+										)
+									}else{
+										alert("验证码错误")
+										changeCode()
+									}
+								},"json")
+							}
 						}
+					},
+					mounted(){
+						this.registerNew();
 					}
 				})
-            }
-		}
     	//回车事件
-    	$(function(){
+    	/*$(function(){
     		
     		$(window).keydown(function(e){
     			if(e.keyCode==13){
@@ -305,7 +302,7 @@
     			}
     		});
     		
-    	});
+    	});*/
 		//页面加载省份
         $(window).off().on("load",function () {
         	var url = "${pageContext.request.contextPath}/address/province";

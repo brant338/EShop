@@ -20,14 +20,14 @@
         select * from tb_user where user_id = #{user_id}
     </select>
 
-    <select id="register" parameterType="UserInfo" resultType="int">
+    <insert id="register" parameterType="UserInfo" useGeneratedKeys="true" keyProperty="user_id">
         insert into
         tb_user(user_name,user_pwd,user_head,user_email,
                 user_sex,user_phone,user_address,question_id,
                 question_answer,province_id,city_id,area_id,time)
-        values(#{user_name},#{user_pwd},#{user_head},#{user_email},
+        values (#{user_name},#{user_pwd},#{user_head},#{user_email},
                #{user_sex},#{user_phone},#{user_address},#{question_id},
                #{question_answer},#{province_id},#{city_id},#{area_id},now())
-    </select>
+    </insert>
 
 </mapper>

@@ -23,7 +23,7 @@ public interface RegDao {
      * userInfo
      * @return
      */
-    int Register(UserInfo userInfo);
+    int register(UserInfo userInfo);
 
     /**
      * 更改指定用户的激活状态
