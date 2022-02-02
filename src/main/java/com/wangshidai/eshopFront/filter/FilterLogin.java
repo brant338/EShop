@@ -1,11 +1,20 @@
 package com.wangshidai.eshopFront.filter;
 
+import com.wangshidai.eshopFront.pojo.UserInfo;
+import com.wangshidai.eshopFront.service.UserService;
+import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
+
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class FilterLogin implements Filter {
+    private UserService userService = new UserServiceImpl();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -16,27 +25,39 @@ public class FilterLogin implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-        //过滤编码格式ֵ
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html; charset=UTF-8");
-
         //获取请求的URI(请求地址)
         String uri = request.getRequestURI();
-        if("/eshop_front/user/member.action".equals(uri) ||
-        "/eshop_front/user/history.action".equals(uri)){
-            Object user = request.getSession().getAttribute("user");
-            if(user == null){
-                request.getSession().setAttribute("loginFrontURL",uri);
-                response.sendRedirect("/eshop_front/user/showLogin.action");
-            }else{
+        if ("/eshop_front/user/member".equals(uri) ||
+                "/eshop_front/user/history".equals(uri)) {
+            //先从session中寻找user
+            UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+            if (user == null) {
+                //先从cookie中寻找user_id
+                Cookie[] cookies = request.getCookies();
+                boolean mark = true;
+                for (Cookie cookie : cookies) {
+                    if (("user_id").equals(cookie.getName())) {
+                        mark = false;
+                        int user_id = Integer.parseInt(cookie.getValue());
+                        UserInfo userInfo = new UserInfo();
+                        userInfo.setUser_id(user_id);
+
+                        Map map = userService.findUser(userInfo);
+                        request.getSession().setAttribute("user", map.get("userInfo"));
+                        filterChain.doFilter(request, response);
+                    }
+                }
+                if (mark) {
+                    request.getSession().setAttribute("loginFrontURL", uri);
+                    response.sendRedirect("/eshop_front/user/showLogin");
+                }
+            } else {
+                //放行
+                filterChain.doFilter(request, response);
+            }
+        } else {
             //放行
-            filterChain.doFilter(request,response);
-        }
-        }else{
-            //放行
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
         }
 
 

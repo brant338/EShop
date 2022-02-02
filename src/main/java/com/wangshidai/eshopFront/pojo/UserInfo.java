@@ -24,6 +24,25 @@ public class UserInfo {
 
     private String password2;      //重复密码
 
+    private String authCode;  //验证码 验证
+    private Boolean user_remember; //记住用户状态
+
+    public String getAuthCode() {
+        return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
+    }
+
+    public Boolean getUser_remember() {
+        return user_remember;
+    }
+
+    public void setUser_remember(Boolean user_remember) {
+        this.user_remember = user_remember;
+    }
+
     public Integer getUser_id() {
         return user_id;
     }
@@ -198,6 +217,8 @@ public class UserInfo {
                 ", lat=" + lat +
                 ", lng=" + lng +
                 ", password2='" + password2 + '\'' +
+                ", authCode='" + authCode + '\'' +
+                ", user_remember=" + user_remember +
                 '}';
     }
 }
