@@ -1,11 +1,24 @@
 package com.wangshidai.eshopFront.entity;
 
-public class City {
+import java.io.Serializable;
+import java.util.List;
+
+public class City implements Serializable {
 
     private Integer id;
     private String cityid;
     private String city;
     private String provinceid;
+
+    private List<Area> areas;
+
+    public List<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
+    }
 
     public Integer getId() {
         return id;
@@ -46,6 +59,7 @@ public class City {
                 ", cityid='" + cityid + '\'' +
                 ", city='" + city + '\'' +
                 ", provinceid='" + provinceid + '\'' +
+                ", areas=" + areas +
                 '}';
     }
 }

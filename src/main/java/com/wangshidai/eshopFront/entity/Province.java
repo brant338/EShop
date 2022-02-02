@@ -1,10 +1,23 @@
 package com.wangshidai.eshopFront.entity;
 
-public class Province {
+import java.io.Serializable;
+import java.util.List;
+
+public class Province implements Serializable {
 
     private Integer id;
     private String provinceid;
     private String province;
+
+    /*private List<City> citys;
+
+    public List<City> getCitys() {
+        return citys;
+    }
+
+    public void setCitys(List<City> citys) {
+        this.citys = citys;
+    }*/
 
     public Integer getId() {
         return id;
@@ -30,12 +43,13 @@ public class Province {
         this.province = province;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Province{" +
                 "id=" + id +
                 ", provinceid='" + provinceid + '\'' +
                 ", province='" + province + '\'' +
+                ", citys=" + citys +
                 '}';
-    }
+    }*/
 }

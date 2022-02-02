@@ -7,11 +7,17 @@
 -->
 <configuration>
 
-
+    <!--全局懒加载    -->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
     <!--批量定义别名-->
     <typeAliases>
         <package name="com.wangshidai.eshopFront.pojo"/>
         <package name="com.wangshidai.eshopFront.entity"/>
     </typeAliases>
+
+
 
 </configuration>

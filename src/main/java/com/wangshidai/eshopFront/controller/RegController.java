@@ -58,7 +58,6 @@ public class RegController {
                 +"<a href=\""+verifyUrl+"\"><h3>完成注册,立即体验娱乐之旅</h3></a>"
                 +"如果不能点击该链接地址,请复制并粘贴到浏览器的地址输入框<br />"+ verifyUrl;
         boolean result = MailUtilByYock.sendMail(userInfo.getUser_email(),userInfo.getUser_name(),"请完成EShop用户注册",content);
-        //System.out.println(uid);
         System.out.println(new ObjectMapper().writeValueAsString(new ResultBean(true,result)));
         response.getWriter().write(new ObjectMapper().writeValueAsString(new ResultBean(true,result)));
 

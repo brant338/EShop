@@ -9,6 +9,7 @@ import com.wangshidai.eshopFront.entity.ResultBean;
 import com.wangshidai.eshopFront.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +37,8 @@ public class AddressController {
     @RequestMapping("/city")
     public void findCity(HttpServletRequest request,
                            HttpServletResponse reponse,
-                           @RequestParam("provinceid") String provinceid) throws IOException {
-
+                           @RequestBody Province province) throws IOException {
+        String provinceid = province.getProvinceid();
         List<City> citys = addressService.findCity(provinceid);
         reponse.getWriter().write(JSON.toJSONString(new ResultBean(true,citys)));
     }
@@ -45,7 +46,8 @@ public class AddressController {
     @RequestMapping("/area")
     public void findArea(HttpServletRequest request,
                            HttpServletResponse reponse,
-                           @RequestParam("cityid") String cityid) throws IOException {
+                           @RequestBody City city) throws IOException {
+        String cityid = city.getCityid();
         List<Area> areas = addressService.findArea(cityid);
         reponse.getWriter().write(JSON.toJSONString(new ResultBean(true,areas)));
     }
