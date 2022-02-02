@@ -8,6 +8,7 @@
 -->
 <mapper namespace="com.wangshidai.eshopFront.dao.AddressDao">
     <!--省份连接城市-->
+    <!---->
     <!--<resultMap id="cityListMap" type="Province" autoMapping="true">
         <id column="provinceid" property="provinceid" />
         <collection property="citys" autoMapping="true" select="com.wangshidai.eshopFront.dao.AddressDao.findCity" column="provinceid" />
@@ -16,6 +17,7 @@
         select * from provinces
     </select>
     <!--城市连接地区-->
+    <!---->
     <!--<resultMap id="areaListMap" type="City" autoMapping="true">
         <id column="cityid" property="cityid" />
         <collection property="areas" autoMapping="true" select="com.wangshidai.eshopFront.dao.AddressDao.findArea" column="cityid" />
