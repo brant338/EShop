@@ -1,17 +1,11 @@
 package com.wangshidai.eshopFront.filter;
 
-import com.wangshidai.eshopFront.dao.UserDao;
 import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
 import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +22,9 @@ public class FilterLogin implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         //获取容器,完成注入
-        ClassPathXmlApplicationContext act = new ClassPathXmlApplicationContext("spring_tx.xml");
-        userService =(UserService)act.getBean("userServiceImpl");
+        /*ClassPathXmlApplicationContext act = new ClassPathXmlApplicationContext("applicationContext-mybatis.xml");
+        userService =(UserService)act.getBean("userServiceImpl");*/
+
     }
 
     @Override
@@ -53,6 +48,11 @@ public class FilterLogin implements Filter {
                     if (("user_id").equals(cookie.getName())) {
                         mark = false;
                         int user_id = Integer.parseInt(cookie.getValue());
+
+                        /*获取并注入的UserServiceImpl*/
+                        WebApplicationContext webApplicationContext =
+                                (WebApplicationContext) request.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+                        userService = webApplicationContext.getBean(UserServiceImpl.class);
 
                         Map map = userService.findUserById(user_id);
                         request.getSession().setAttribute("user", map.get("userInfo"));

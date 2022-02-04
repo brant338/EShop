@@ -25,10 +25,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateOnlineStatus(int user_id, int status) {
+    public void updateOnlineStatus(int user_id, int is_online) {
         Map map = new HashMap();
         map.put("user_id",user_id);
-        map.put("status",status);
+        map.put("is_online",is_online);
 
         userDao.updateOnlineStatus(map);
     }

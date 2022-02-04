@@ -9,7 +9,7 @@ import java.util.Map;
 public interface UserService {
     Map findUser(UserInfo userInfo);
 
-    void updateOnlineStatus(int user_id,int status);
+    void updateOnlineStatus(int user_id,int is_online);
 
     Map findUserById(int user_id);
 

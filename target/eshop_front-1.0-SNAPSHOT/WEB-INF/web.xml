@@ -13,7 +13,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springmvc.xml</param-value>
+            <param-value>classpath:applicationContext-springmvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -50,6 +50,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--  **********Spring的配置**********  -->
+    <!-- 配置监听器类，Spring框架提供的一个类，它用于加载spring框架的所有配置文件  -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--  配置ServletContext的初始化参数  -->
+    <!--  用于告诉spring框架，我的spring配置文件在哪  -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/applicationContext*.xml</param-value>
+    </context-param>
 
 
 

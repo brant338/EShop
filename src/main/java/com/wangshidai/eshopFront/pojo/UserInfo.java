@@ -2,6 +2,7 @@ package com.wangshidai.eshopFront.pojo;
 
 import com.wangshidai.eshopFront.service.UserService;
 import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpSessionEvent;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo /*implements HttpSessionBindingListener, HttpSessionActivationListener, Serializable*/ {
+public class UserInfo  implements HttpSessionBindingListener, HttpSessionActivationListener, Serializable {
     private Integer user_id;   //用户ID
     private String user_name;  //用户名
     private String user_pwd;   //用户密码
@@ -233,33 +234,52 @@ public class UserInfo /*implements HttpSessionBindingListener, HttpSessionActiva
                 ", user_remember=" + user_remember +
                 '}';
     }
-    /*//HttpSessionActivationListener接口的
+    //HttpSessionActivationListener接口的
     @Override
     public void sessionWillPassivate(HttpSessionEvent httpSessionEvent) {
+        /*获取并注入的UserServiceImpl*/
+        WebApplicationContext webApplicationContext =
+                (WebApplicationContext) httpSessionEvent.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        userService = webApplicationContext.getBean(UserServiceImpl.class);
+
         System.out.println("userInfo对象跟着session一起钝化了");
         userService.updateOnlineStatus(this.getUser_id(),0);
     }
 
     @Override
     public void sessionDidActivate(HttpSessionEvent httpSessionEvent) {
+        /*获取并注入的UserServiceImpl*/
+        /*WebApplicationContext webApplicationContext =
+                (WebApplicationContext) httpSessionEvent.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        userService = webApplicationContext.getBean(UserServiceImpl.class);*/
+
         System.out.println("userInfo对象跟着session一起活化了");
-        userService.updateOnlineStatus(this.getUser_id(),1);
+        //userService.updateOnlineStatus(this.getUser_id(),1);
     }
 
     //HttpSessionBindingListener接口的
 
     @Override
     public void valueBound(HttpSessionBindingEvent httpSessionBindingEvent) {
-        System.out.println("userInfo对象存入session中【上线】");
+        /*获取并注入的UserServiceImpl*/
+        WebApplicationContext webApplicationContext =
+                (WebApplicationContext) httpSessionBindingEvent.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        userService = webApplicationContext.getBean(UserServiceImpl.class);
 
+
+        System.out.println("userInfo对象存入session中【上线】");
         userService.updateOnlineStatus(this.getUser_id(),1);
 
     }
 
     @Override
     public void valueUnbound(HttpSessionBindingEvent httpSessionBindingEvent) {
-        System.out.println("userInfo对象从session中移除【下线】");
+        /*获取并注入的UserServiceImpl*/
+        WebApplicationContext webApplicationContext =
+                (WebApplicationContext) httpSessionBindingEvent.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        userService = webApplicationContext.getBean(UserServiceImpl.class);
 
+        System.out.println("userInfo对象从session中移除【下线】");
         userService.updateOnlineStatus(this.getUser_id(),0);
-    }*/
+    }
 }

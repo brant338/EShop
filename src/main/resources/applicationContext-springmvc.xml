@@ -15,7 +15,7 @@
 
     <!--加载mvc注解驱动-->
     <mvc:annotation-driven />
-    <import resource="classpath:spring_tx.xml"/>
+    <import resource="classpath:applicationContext-mybatis.xml"/>
 
     <!--配置视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

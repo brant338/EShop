@@ -14,7 +14,7 @@
     </select>
 
     <update id="updateOnlineStatus" parameterType="Map" >
-        update tb_user set is_online = status where user_id = #{user_id}
+        update tb_user set is_online = #{is_online} where user_id = #{user_id}
     </update>
 
     <select id="findUserById" parameterType="int" resultType="UserInfo">
