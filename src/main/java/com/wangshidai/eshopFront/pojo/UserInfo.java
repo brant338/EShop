@@ -1,8 +1,16 @@
 package com.wangshidai.eshopFront.pojo;
 
+import com.wangshidai.eshopFront.service.UserService;
+import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
+
+import javax.servlet.http.HttpSessionActivationListener;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+import javax.servlet.http.HttpSessionEvent;
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo /*implements HttpSessionBindingListener, HttpSessionActivationListener, Serializable*/ {
     private Integer user_id;   //用户ID
     private String user_name;  //用户名
     private String user_pwd;   //用户密码
@@ -26,6 +34,8 @@ public class UserInfo {
 
     private String authCode;  //验证码 验证
     private Boolean user_remember; //记住用户状态
+
+    private UserService userService = new UserServiceImpl();
 
     public String getAuthCode() {
         return authCode;
@@ -195,6 +205,8 @@ public class UserInfo {
         this.password2 = password2;
     }
 
+
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -221,4 +233,33 @@ public class UserInfo {
                 ", user_remember=" + user_remember +
                 '}';
     }
+    /*//HttpSessionActivationListener接口的
+    @Override
+    public void sessionWillPassivate(HttpSessionEvent httpSessionEvent) {
+        System.out.println("userInfo对象跟着session一起钝化了");
+        userService.updateOnlineStatus(this.getUser_id(),0);
+    }
+
+    @Override
+    public void sessionDidActivate(HttpSessionEvent httpSessionEvent) {
+        System.out.println("userInfo对象跟着session一起活化了");
+        userService.updateOnlineStatus(this.getUser_id(),1);
+    }
+
+    //HttpSessionBindingListener接口的
+
+    @Override
+    public void valueBound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        System.out.println("userInfo对象存入session中【上线】");
+
+        userService.updateOnlineStatus(this.getUser_id(),1);
+
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        System.out.println("userInfo对象从session中移除【下线】");
+
+        userService.updateOnlineStatus(this.getUser_id(),0);
+    }*/
 }

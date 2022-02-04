@@ -4,19 +4,14 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
-import com.wangshidai.eshopFront.entity.PwdQuestion;
 import com.wangshidai.eshopFront.entity.ResultBean;
 import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
-import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
-import com.wangshidai.eshopFront.utils.JsonUtils;
-import com.wangshidai.eshopFront.utils.MailUtilByYock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -97,7 +92,7 @@ public class UserController {
                 //响应数据
                 if(map.get("userInfo") != null){
                     //保存用户信息至session中
-                    request.getSession().setAttribute("user",userInfo);
+                    request.getSession().setAttribute("user",userInfo1);
                     //记住用户状态
                     if(userInfo.getUser_remember()){
                         Cookie cookie = new Cookie("user_id", (userInfo1.getUser_id()+""));
@@ -134,8 +129,14 @@ public class UserController {
     @RequestMapping("/logOut")
     public ModelAndView logOut(HttpServletRequest request,
                        HttpServletResponse response){
-
+        //清除session
         request.getSession().removeAttribute("user");
+
+        //清除cookie
+        Cookie cookie = new Cookie("user_id","");
+        cookie.setMaxAge(0);
+        cookie.setPath("/eshop_front/");
+        response.addCookie(cookie);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("sign-in");

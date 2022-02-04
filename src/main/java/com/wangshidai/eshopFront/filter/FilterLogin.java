@@ -1,8 +1,15 @@
 package com.wangshidai.eshopFront.filter;
 
+import com.wangshidai.eshopFront.dao.UserDao;
 import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.UserService;
 import com.wangshidai.eshopFront.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import javax.jws.soap.SOAPBinding;
 import javax.servlet.*;
@@ -12,12 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+
 public class FilterLogin implements Filter {
-    private UserService userService = new UserServiceImpl();
+
+
+    private UserService userService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        //获取容器,完成注入
+        ClassPathXmlApplicationContext act = new ClassPathXmlApplicationContext("spring_tx.xml");
+        userService =(UserService)act.getBean("userServiceImpl");
     }
 
     @Override
@@ -25,12 +37,14 @@ public class FilterLogin implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+
+        //先从session中寻找user
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+
         //获取请求的URI(请求地址)
         String uri = request.getRequestURI();
         if ("/eshop_front/user/member".equals(uri) ||
-                "/eshop_front/user/history".equals(uri)) {
-            //先从session中寻找user
-            UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+            "/eshop_front/user/history".equals(uri)) {
             if (user == null) {
                 //先从cookie中寻找user_id
                 Cookie[] cookies = request.getCookies();
@@ -39,10 +53,8 @@ public class FilterLogin implements Filter {
                     if (("user_id").equals(cookie.getName())) {
                         mark = false;
                         int user_id = Integer.parseInt(cookie.getValue());
-                        UserInfo userInfo = new UserInfo();
-                        userInfo.setUser_id(user_id);
 
-                        Map map = userService.findUser(userInfo);
+                        Map map = userService.findUserById(user_id);
                         request.getSession().setAttribute("user", map.get("userInfo"));
                         filterChain.doFilter(request, response);
                     }
@@ -59,12 +71,11 @@ public class FilterLogin implements Filter {
             //放行
             filterChain.doFilter(request, response);
         }
-
-
     }
 
     @Override
     public void destroy() {
         //Filter.super.destroy();
     }
+
 }

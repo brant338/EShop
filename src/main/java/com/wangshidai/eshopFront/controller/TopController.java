@@ -1,6 +1,7 @@
 package com.wangshidai.eshopFront.controller;
 
 import com.wangshidai.eshopFront.pojo.TypeInfo;
+import com.wangshidai.eshopFront.pojo.UserInfo;
 import com.wangshidai.eshopFront.service.TopService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class TopController extends HttpServlet {
 
         request.setAttribute("rootType",rootType);
         request.setAttribute("goodDetailMenu",goodDetailMenu);
+
         //请求包含
         request.getRequestDispatcher("/WEB-INF/views/top.jsp").include(request,response);
     }

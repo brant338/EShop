@@ -15,5 +15,8 @@
     <!--开启事务注解驱动-->
     <tx:annotation-driven />
 
+    <!--注入userServiceImpl-->
+    <bean id="userServiceImpl" class="com.wangshidai.eshopFront.service.impl.UserServiceImpl"></bean>
+    
 
 </beans>

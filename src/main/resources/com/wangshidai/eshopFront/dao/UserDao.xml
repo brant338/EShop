@@ -13,4 +13,12 @@
         where (user_name = #{user_name} or user_email = #{user_email}) and user_pwd = #{user_pwd}
     </select>
 
+    <update id="updateOnlineStatus" parameterType="Map" >
+        update tb_user set is_online = status where user_id = #{user_id}
+    </update>
+
+    <select id="findUserById" parameterType="int" resultType="UserInfo">
+        select * from tb_user where user_id = #{user_id}
+    </select>
+
 </mapper>

@@ -24,5 +24,23 @@ public class UserServiceImpl implements UserService {
         return map;
     }
 
+    @Override
+    public void updateOnlineStatus(int user_id, int status) {
+        Map map = new HashMap();
+        map.put("user_id",user_id);
+        map.put("status",status);
+
+        userDao.updateOnlineStatus(map);
+    }
+
+    @Override
+    public Map findUserById(int user_id) {
+        Map map = new HashMap();
+        if(userDao.findUserById(user_id) != null){
+            map.put("userInfo",userDao.findUserById(user_id));
+        }
+        return map;
+    }
+
 
 }
