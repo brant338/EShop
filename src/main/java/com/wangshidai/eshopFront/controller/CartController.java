@@ -13,19 +13,19 @@ import java.util.Map;
 @RequestMapping("/cart")
 public class CartController {
 
-        @RequestMapping("/showCart")
-        public ModelAndView showCart(HttpServletRequest request,
-                                     HttpServletResponse response){
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("cart");
-            return  modelAndView;
-        }
+    @RequestMapping("/showCart")
+    public ModelAndView showCart(HttpServletRequest request,
+                                 HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("cart");
+        return modelAndView;
+    }
 
-        @RequestMapping("/addCart")
-        public void addCart(HttpServletRequest request,
-                            HttpServletResponse response){
-            Map<String,Object> returnMap = new HashMap<>();
-            //购物车存储结构
+    @RequestMapping("/addCart")
+    public void addCart(HttpServletRequest request,
+                        HttpServletResponse response) {
+        Map<String, Object> returnMap = new HashMap<>();
+        //购物车存储结构
             /*
             {key=value}
             {book_id=num}
@@ -33,17 +33,17 @@ public class CartController {
             */
 
 
-        }
+    }
 
     @RequestMapping("/removeCart")
     public void removeCart(HttpServletRequest request,
-                        HttpServletResponse response){
+                           HttpServletResponse response) {
 
     }
 
     @RequestMapping("/updateCart")
     public void updateCart(HttpServletRequest request,
-                        HttpServletResponse response){
+                           HttpServletResponse response) {
 
 
     }
