@@ -22,11 +22,11 @@
                 <span><a href="${pageContext.request.contextPath}/user/member"><span>我的账户</span></a></span><b class="icon"></b>
                 <ul>
                     <li>
-                        <a href="history.html"><span>浏览记录</span></a>
+                        <a href="${pageContext.request.contextPath}/history/showHistory"><span>浏览记录</span></a>
                     </li>
 
                     <li>
-                        <a href="cart.html"><span>购物车(10)</span></a>
+                        <a href="${pageContext.request.contextPath}/cart/showCart"><span>购物车(10)</span></a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/user/logOut"><span>退出登录</span></a>

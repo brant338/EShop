@@ -37,7 +37,7 @@
 			<div class="cartBox">
 				<div class="order_content">
 					<ul class="order_lists">
-						<li class="list_chk"><input type="checkbox" id="checkbox_2"
+						<li class="list_chk"><input type="checkbox"
 							class="son_check"> <label for="checkbox_2"></label></li>
 						<li class="list_con">
 							<div class="list_img">
@@ -59,7 +59,7 @@
 					</ul>
 					
 					<ul class="order_lists">
-						<li class="list_chk"><input type="checkbox" id="checkbox_2"
+						<li class="list_chk"><input type="checkbox"
 							class="son_check"> <label for="checkbox_2"></label></li>
 						<li class="list_con">
 							<div class="list_img">
@@ -127,6 +127,7 @@
 
 			<script src="${pageContext.request.contextPath}/public/js/jquery.min.js"></script>
 			<script src="${pageContext.request.contextPath}/public/js/carts.js"></script>
+			</section>
 		</div>
 	</div>
 
