@@ -1,7 +1,7 @@
 package com.wangshidai.eshopFront.controller;
 
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
-import com.wangshidai.eshopFront.pojo.GoodsInfo;
+import com.wangshidai.eshopFront.pojo.GoodInfo;
 import com.wangshidai.eshopFront.pojo.PageInfo;
 import com.wangshidai.eshopFront.pojo.TypeInfo;
 import com.wangshidai.eshopFront.service.GoodsService;
@@ -27,6 +27,7 @@ public class GoodsController {
     @Autowired
     private TopService topService;
 
+
     @RequestMapping("/type")
     public ModelAndView find(HttpServletRequest request,
                              HttpServletResponse response,
@@ -40,7 +41,7 @@ public class GoodsController {
         Map map = new HashMap();
 
 
-        PageInfo<GoodsInfo> pageInfo = new PageInfo();
+        PageInfo<GoodInfo> pageInfo = new PageInfo();
         pageInfo.setPageSize(4);
 
         if(currentPage != null){
@@ -58,7 +59,7 @@ public class GoodsController {
         map.put("keyword",keyword);
         map.put("pageInfo",pageInfo);
 
-        List<GoodsInfo> goodList = goodsService.findGood(map);
+        List<GoodInfo> goodList = goodsService.findGood(map);
         int goodCount = goodsService.findGoodCount(map);
 
         //封装分页有关参数
@@ -90,7 +91,7 @@ public class GoodsController {
                                  HttpServletResponse response,
                                  @RequestParam("book_id") int book_id){
 
-        GoodsInfo goodDetail = goodsService.findGoodOne(book_id);
+        GoodInfo goodDetail = goodsService.findGoodOne(book_id);
         List<GoodPicInfo> goodPics = goodsService.findGoodPic(book_id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("product_info");

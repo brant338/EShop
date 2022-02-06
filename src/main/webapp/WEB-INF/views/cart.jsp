@@ -43,37 +43,41 @@
                             for="shop_a" class="shop"></label>
                     </div>
                     <div class="shop_name">
-                        店铺：<a href="javascript:;">搜猎人艺术生活</a>
+                        店铺：<a href="javascript:;">eshop电子商城</a>
                     </div>
                 </div>
                 <div class="order_content">
+                    <c:forEach items="${goodByCartList}" var="goodInfo">
+
                     <ul class="order_lists">
                         <li class="list_chk"><input type="checkbox" id="checkbox_2"
                                                     class="son_check"> <label for="checkbox_2"></label></li>
                         <li class="list_con">
                             <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/euro.jpg" alt=""></a>
+                                <a href="javascript:;"><img src="${pageContext.request.contextPath}/upload/${goodInfo.book_logo_big}" alt=""></a>
                             </div>
                             <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
+                                <a href="javascript:;">${goodInfo.book_name}</a>
                             </div>
                         </li>
                         <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
+                            <p>作者：${goodInfo.book_author}</p>
+                            <p>出版社：${goodInfo.book_press}</p>
                         </li>
                         <li class="list_price">
-                            <p class="price">￥980</p>
+                            <p class="price">￥${goodInfo.book_price}</p>
                         </li>
                         <li class="list_amount">
                             <div class="amount_box">
                                 <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
+                                    type="text" value="${goodInfo.num}" class="sum"> <a
                                     href="javascript:;" class="plus">+</a>
                             </div>
                         </li>
                         <li class="list_sum">
-                            <p class="sum_price">￥980</p>
+                            <p class="sum_price">￥
+                                <fmt:formatNumber value="${goodInfo.book_price*goodInfo.num}" pattern=".#"></fmt:formatNumber>
+                            </p>
                         </li>
                         <li class="list_op">
                             <p class="del">
@@ -81,244 +85,8 @@
                             </p>
                         </li>
                     </ul>
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_3"
-                                                    class="son_check"> <label for="checkbox_3"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/tripcn.jpg"
-                                                            alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥780</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥780</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_6"
-                                                    class="son_check"> <label for="checkbox_6"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/photog.jpg"
-                                                            alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥180</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥180</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="cartBox">
-                <div class="shop_info">
-                    <div class="all_check">
-                        <!--店铺全选-->
-                        <input type="checkbox" id="shop_b" class="shopChoice"> <label
-                            for="shop_b" class="shop"></label>
-                    </div>
-                    <div class="shop_name">
-                        店铺：<a href="javascript:;">卷卷旗舰店</a>
-                    </div>
-                </div>
-                <div class="order_content">
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_4"
-                                                    class="son_check"> <label for="checkbox_4"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/ngcn.jpg" alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥1980</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥1980</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_5"
-                                                    class="son_check"> <label for="checkbox_5"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/travelbook.jpg"
-                                                            alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥480</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥480</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cartBox">
-                <div class="shop_info">
-                    <div class="all_check">
-                        <!--店铺全选-->
-                        <input type="checkbox" id="shop_c" class="shopChoice"> <label
-                            for="shop_c" class="shop"></label>
-                    </div>
-                    <div class="shop_name">
-                        店铺：<a href="javascript:;">卷卷旗舰店</a>
-                    </div>
-                </div>
-                <div class="order_content">
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_8"
-                                                    class="son_check"> <label for="checkbox_8"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/dulala.jpg"
-                                                            alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥1980</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥1980</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
-                    <ul class="order_lists">
-                        <li class="list_chk"><input type="checkbox" id="checkbox_9"
-                                                    class="son_check"> <label for="checkbox_9"></label></li>
-                        <li class="list_con">
-                            <div class="list_img">
-                                <a href="javascript:;"><img src="bookcover/think.jpg" alt=""></a>
-                            </div>
-                            <div class="list_text">
-                                <a href="javascript:;">尼泊尔(Lonely Planet旅行指南系列)</a>
-                            </div>
-                        </li>
-                        <li class="list_info">
-                            <p>规格：默认</p>
-                            <p>尺寸：16*16*3(cm)</p>
-                        </li>
-                        <li class="list_price">
-                            <p class="price">￥480</p>
-                        </li>
-                        <li class="list_amount">
-                            <div class="amount_box">
-                                <a href="javascript:;" class="reduce reSty">-</a> <input
-                                    type="text" value="1" class="sum"> <a
-                                    href="javascript:;" class="plus">+</a>
-                            </div>
-                        </li>
-                        <li class="list_sum">
-                            <p class="sum_price">￥480</p>
-                        </li>
-                        <li class="list_op">
-                            <p class="del">
-                                <a href="javascript:;" class="delBtn">移除商品</a>
-                            </p>
-                        </li>
-                    </ul>
+                    </c:forEach>
                 </div>
             </div>
             <!--底部-->
@@ -348,8 +116,7 @@
             </div>
         </section>
 
-        <script src="${pageContext.request.contextPath}/public/js/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/public/js/carts.js"></script>
+
     </div>
 </div>
 
@@ -368,10 +135,14 @@
         </div>
     </div>
 </div>
-
+<script src="${pageContext.request.contextPath}/public/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/public/js/carts.js"></script>
 <script src="${pageContext.request.contextPath}/public/js/other/jquery_highlight.js"
         type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/public/js/member.js" type="text/javascript"></script>
+
+
+
 <div class="mmsg-box mmsg-box-info" id='msg-box'
      style="margin-top: -23.5px; margin-left: -96.5px;">
     <div class="mmsg-content">

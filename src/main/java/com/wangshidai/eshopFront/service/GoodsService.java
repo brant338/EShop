@@ -1,7 +1,7 @@
 package com.wangshidai.eshopFront.service;
 
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
-import com.wangshidai.eshopFront.pojo.GoodsInfo;
+import com.wangshidai.eshopFront.pojo.GoodInfo;
 
 import com.wangshidai.eshopFront.pojo.TypeInfo;
 
@@ -26,7 +26,7 @@ public interface GoodsService {
      * @param map
      * @return
      */
-    List<GoodsInfo> findGood(Map map);
+    List<GoodInfo> findGood(Map map);
 
     /**
      * 根据搜索框查询商品信息
@@ -41,7 +41,7 @@ public interface GoodsService {
      * @param book_id
      * @return
      */
-    GoodsInfo findGoodOne(int book_id);
+    GoodInfo findGoodOne(int book_id);
 
     /**
      * 查询商品图片(小图)

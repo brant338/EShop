@@ -11,7 +11,7 @@
         select * from tb_type where parent_id = #{rootTypeId}
     </select>
 
-    <select id="findGoodOne" parameterType="int" resultType="GoodsInfo">
+    <select id="findGoodOne" parameterType="int" resultType="GoodInfo">
         select * from tb_book where book_id = #{book_id}
     </select>
 
@@ -19,7 +19,7 @@
         select * from tb_book_pic where book_id = #{book_id}
     </select>
 
-    <select id="findGood" parameterType="map" resultType="GoodsInfo">
+    <select id="findGood" parameterType="map" resultType="GoodInfo">
         <if test="type_id != null and type_id != ''">
             <if test="keyword == null or keyword == ''">
                 <if test="child_type_id != null and child_type_id != ''">

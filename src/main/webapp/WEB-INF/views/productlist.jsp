@@ -261,7 +261,11 @@
 <script src="${pageContext.request.contextPath}/public/js/jquery.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/public/js/common.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/public/js/other/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+<script>
 
+
+
+</script>
 </body>
 </html>
 

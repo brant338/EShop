@@ -1,10 +1,9 @@
 package com.wangshidai.eshopFront.dao;
 
 import com.wangshidai.eshopFront.pojo.GoodPicInfo;
-import com.wangshidai.eshopFront.pojo.GoodsInfo;
+import com.wangshidai.eshopFront.pojo.GoodInfo;
 
 import com.wangshidai.eshopFront.pojo.TypeInfo;
-import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
@@ -27,7 +26,7 @@ public interface GoodsDao {
      * @param map
      * @return
      */
-    List<GoodsInfo> findGood(Map map);
+    List<GoodInfo> findGood(Map map);
 
     /**
      * 查询商品总个数
@@ -43,7 +42,7 @@ public interface GoodsDao {
      * @param book_id
      * @return
      */
-    GoodsInfo findGoodOne(int book_id);
+    GoodInfo findGoodOne(int book_id);
 
     /**
      * 查询商品图片(小图)
@@ -52,4 +51,6 @@ public interface GoodsDao {
      * @return
      */
     List<GoodPicInfo> findGoodPic(int book_id);
+
+    List<GoodInfo> findGoodByCart(Map<Integer, Integer> cartMap);
 }

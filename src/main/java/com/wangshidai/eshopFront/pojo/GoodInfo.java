@@ -2,7 +2,7 @@ package com.wangshidai.eshopFront.pojo;
 
 import java.sql.Timestamp;
 
-public class GoodsInfo {
+public class GoodInfo {
     private Integer book_id; //书籍ID
     private String book_name; //书籍名称
     private String book_logo_small; //书籍logo图(小)
@@ -19,6 +19,16 @@ public class GoodsInfo {
     private Integer is_new; //0非新品 其他任意正整数代表新品
     private Integer is_hot; //0非热销 其他任意正整数代表热销
     private Integer is_garbage; //0代表不是垃圾 1代表垃圾
+
+    private Integer num; //书本数量
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 
     public Integer getBook_id() {
         return book_id;
@@ -150,7 +160,7 @@ public class GoodsInfo {
 
     @Override
     public String toString() {
-        return "GoodsInfo{" +
+        return "GoodInfo{" +
                 "book_id=" + book_id +
                 ", book_name='" + book_name + '\'' +
                 ", book_logo_small='" + book_logo_small + '\'' +
@@ -167,6 +177,7 @@ public class GoodsInfo {
                 ", is_new=" + is_new +
                 ", is_hot=" + is_hot +
                 ", is_garbage=" + is_garbage +
+                ", num=" + num +
                 '}';
     }
 }
